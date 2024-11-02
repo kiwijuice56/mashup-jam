@@ -1,12 +1,14 @@
-[gd_scene load_steps=23 format=3 uid="uid://dxll8u1glai8n"]
+[gd_scene load_steps=26 format=3 uid="uid://dxll8u1glai8n"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_7i6fg"]
+[ext_resource type="Script" path="res://main.gd" id="1_pk7a3"]
 [ext_resource type="Texture2D" uid="uid://bs3lovfubk2em" path="res://assets/gravity.jpg" id="2_4d0g7"]
 [ext_resource type="Texture2D" uid="uid://bru5uem5oa1ow" path="res://assets/sky.jpg" id="2_sl5tm"]
 [ext_resource type="Texture2D" uid="uid://c1ihgawj61x6c" path="res://icon.svg" id="4_2r6yu"]
 [ext_resource type="Shader" path="res://assets/filter.gdshader" id="4_unutx"]
 [ext_resource type="Shader" path="res://assets/filter2.gdshader" id="5_bvyy0"]
 [ext_resource type="Shader" path="res://assets/vignette.gdshader" id="6_dhwh1"]
+[ext_resource type="Shader" path="res://assets/pixelation.gdshader" id="8_31ka2"]
 [ext_resource type="Shader" path="res://assets/chromatic.gdshader" id="8_fkqxx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sry0m"]
@@ -42,27 +44,38 @@ noise = SubResource("FastNoiseLite_gkfbn")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mvsja"]
 shader = ExtResource("4_unutx")
 shader_parameter/block_size = 12.0
+shader_parameter/sanity = 0.0
 shader_parameter/noise1 = SubResource("NoiseTexture2D_kfor6")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_wkue3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q57k2"]
 shader = ExtResource("5_bvyy0")
 shader_parameter/block_size = 22.0
+shader_parameter/sanity = 0.0
 shader_parameter/noise1 = SubResource("NoiseTexture2D_kfor6")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_wkue3")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e5ghy"]
+shader = ExtResource("8_31ka2")
+shader_parameter/fog_color = Color(0, 0, 0, 1)
+shader_parameter/resolution_downsampling = 1.0
+shader_parameter/bit_depth = 4.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_no7nd"]
 shader = ExtResource("8_fkqxx")
-shader_parameter/r_displacement = Vector2(4, 0)
+shader_parameter/r_displacement = Vector2(1, 0)
 shader_parameter/g_displacement = Vector2(0, 2)
 shader_parameter/b_displacement = Vector2(-3, 0)
+shader_parameter/sanity = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k3hwj"]
 shader = ExtResource("6_dhwh1")
 shader_parameter/outerRadius = 2.9
 shader_parameter/MainAlpha = 0.8
+shader_parameter/sanity = 1.0
 
 [node name="Main" type="Node"]
+script = ExtResource("1_pk7a3")
 
 [node name="Character" parent="." instance=ExtResource("1_7i6fg")]
 
@@ -96,33 +109,47 @@ texture = ExtResource("4_2r6yu")
 position = Vector2(333, 142)
 texture = ExtResource("4_2r6yu")
 
-[node name="Filter" type="ColorRect" parent="Filter1"]
+[node name="Filter" type="ColorRect" parent="Filter1" groups=["Sanity"]]
 material = SubResource("ShaderMaterial_mvsja")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Filter2" type="CanvasLayer" parent="."]
 
-[node name="Filter2" type="ColorRect" parent="Filter2"]
+[node name="Filter2" type="ColorRect" parent="Filter2" groups=["Sanity"]]
 material = SubResource("ShaderMaterial_q57k2")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Filter5" type="CanvasLayer" parent="."]
+
+[node name="Pixelation" type="ColorRect" parent="Filter5"]
+material = SubResource("ShaderMaterial_e5ghy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Filter4" type="CanvasLayer" parent="."]
 
-[node name="Abberation" type="ColorRect" parent="Filter4"]
+[node name="Abberation" type="ColorRect" parent="Filter4" groups=["Sanity"]]
 material = SubResource("ShaderMaterial_no7nd")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Filter3" type="CanvasLayer" parent="."]
 
@@ -133,3 +160,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
