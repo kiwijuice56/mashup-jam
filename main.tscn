@@ -1,0 +1,135 @@
+[gd_scene load_steps=23 format=3 uid="uid://dxll8u1glai8n"]
+
+[ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_7i6fg"]
+[ext_resource type="Texture2D" uid="uid://bs3lovfubk2em" path="res://assets/gravity.jpg" id="2_4d0g7"]
+[ext_resource type="Texture2D" uid="uid://bru5uem5oa1ow" path="res://assets/sky.jpg" id="2_sl5tm"]
+[ext_resource type="Texture2D" uid="uid://c1ihgawj61x6c" path="res://icon.svg" id="4_2r6yu"]
+[ext_resource type="Shader" path="res://assets/filter.gdshader" id="4_unutx"]
+[ext_resource type="Shader" path="res://assets/filter2.gdshader" id="5_bvyy0"]
+[ext_resource type="Shader" path="res://assets/vignette.gdshader" id="6_dhwh1"]
+[ext_resource type="Shader" path="res://assets/chromatic.gdshader" id="8_fkqxx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sry0m"]
+albedo_texture = ExtResource("2_4d0g7")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ee8yi"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3hkvs"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hdfj2"]
+panorama = ExtResource("2_sl5tm")
+
+[sub_resource type="Sky" id="Sky_oprn1"]
+sky_material = SubResource("PanoramaSkyMaterial_hdfj2")
+
+[sub_resource type="Environment" id="Environment_1bgnf"]
+background_mode = 2
+sky = SubResource("Sky_oprn1")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tn7uo"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kfor6"]
+noise = SubResource("FastNoiseLite_tn7uo")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gkfbn"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wkue3"]
+noise = SubResource("FastNoiseLite_gkfbn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mvsja"]
+shader = ExtResource("4_unutx")
+shader_parameter/block_size = 12.0
+shader_parameter/noise1 = SubResource("NoiseTexture2D_kfor6")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_wkue3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q57k2"]
+shader = ExtResource("5_bvyy0")
+shader_parameter/block_size = 22.0
+shader_parameter/noise1 = SubResource("NoiseTexture2D_kfor6")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_wkue3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_no7nd"]
+shader = ExtResource("8_fkqxx")
+shader_parameter/r_displacement = Vector2(4, 0)
+shader_parameter/g_displacement = Vector2(0, 2)
+shader_parameter/b_displacement = Vector2(-3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k3hwj"]
+shader = ExtResource("6_dhwh1")
+shader_parameter/outerRadius = 2.9
+shader_parameter/MainAlpha = 0.8
+
+[node name="Main" type="Node"]
+
+[node name="Character" parent="." instance=ExtResource("1_7i6fg")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_sry0m")
+mesh = SubResource("PlaneMesh_ee8yi")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3hkvs")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bgnf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.102289, 0.440378, -0.891966, 0.0501729, 0.897812, 0.437511, 0.993489, 0, -0.113931, 0, 1.83119, 0)
+
+[node name="Filter1" type="CanvasLayer" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="Filter1"]
+position = Vector2(73, 105)
+texture = ExtResource("4_2r6yu")
+
+[node name="Icon2" type="Sprite2D" parent="Filter1"]
+position = Vector2(188, 204)
+texture = ExtResource("4_2r6yu")
+
+[node name="Icon3" type="Sprite2D" parent="Filter1"]
+position = Vector2(333, 142)
+texture = ExtResource("4_2r6yu")
+
+[node name="Filter" type="ColorRect" parent="Filter1"]
+material = SubResource("ShaderMaterial_mvsja")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Filter2" type="CanvasLayer" parent="."]
+
+[node name="Filter2" type="ColorRect" parent="Filter2"]
+material = SubResource("ShaderMaterial_q57k2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Filter4" type="CanvasLayer" parent="."]
+
+[node name="Abberation" type="ColorRect" parent="Filter4"]
+material = SubResource("ShaderMaterial_no7nd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Filter3" type="CanvasLayer" parent="."]
+
+[node name="Vignette" type="ColorRect" parent="Filter3"]
+material = SubResource("ShaderMaterial_k3hwj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
