@@ -1,23 +1,23 @@
 [gd_scene load_steps=7 format=3 uid="uid://f7pa85osf5es"]
 
 [ext_resource type="PackedScene" uid="uid://boto66t1pnymt" path="res://item/item.tscn" id="1_w5u2p"]
-[ext_resource type="Shader" path="res://assets/psx.gdshader" id="2_5rgec"]
 [ext_resource type="Texture2D" uid="uid://cye0w2vncpm8x" path="res://item/glaggler/glaggler_texture.png" id="2_arffr"]
+[ext_resource type="Shader" uid="uid://cvanwhl3pa162" path="res://assets/psx_no_alpha.tres" id="2_o8ghn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2om03"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xyasv"]
 render_priority = 0
-shader = ExtResource("2_5rgec")
-shader_parameter/jitter = 0.7
+shader = ExtResource("2_o8ghn")
+shader_parameter/jitter = 0.508
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
 shader_parameter/affine_texture_mapping = true
-shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo = ExtResource("2_arffr")
 
 [sub_resource type="SphereMesh" id="SphereMesh_m7cvt"]
-radius = 0.4
+radius = 0.2
+height = 0.4
 radial_segments = 8
 rings = 6
 

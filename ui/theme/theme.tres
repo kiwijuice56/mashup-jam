@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://eovd5sm1pdpq"]
+
+[ext_resource type="FontFile" uid="uid://bs7kc4db545cf" path="res://ui/theme/COMIC.TTF" id="1_sshbe"]
+
+[sub_resource type="FontVariation" id="FontVariation_6524p"]
+base_font = ExtResource("1_sshbe")
+
+[resource]
+default_font = SubResource("FontVariation_6524p")

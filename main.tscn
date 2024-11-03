@@ -1,8 +1,9 @@
-[gd_scene load_steps=44 format=3 uid="uid://dxll8u1glai8n"]
+[gd_scene load_steps=47 format=3 uid="uid://dxll8u1glai8n"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://player/player.tscn" id="1_7i6fg"]
 [ext_resource type="Script" path="res://main.gd" id="1_pk7a3"]
 [ext_resource type="Texture2D" uid="uid://bs3lovfubk2em" path="res://assets/gravity.jpg" id="2_4d0g7"]
+[ext_resource type="PackedScene" uid="uid://b0k3rqtrx5c8b" path="res://chunk/chunk.tscn" id="3_mp5cb"]
 [ext_resource type="Shader" path="res://assets/psx.gdshader" id="3_nk6hg"]
 [ext_resource type="PackedScene" uid="uid://f7pa85osf5es" path="res://item/glaggler/glaggler.tscn" id="4_oluyo"]
 [ext_resource type="Shader" path="res://assets/filter.gdshader" id="4_unutx"]
@@ -11,11 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://dgf45k1y3b2yh" path="res://assets/sky.png" id="6_yyr4t"]
 [ext_resource type="Shader" path="res://assets/pixelation.gdshader" id="8_31ka2"]
 [ext_resource type="Shader" path="res://assets/chromatic.gdshader" id="8_fkqxx"]
-[ext_resource type="FontFile" uid="uid://bs7kc4db545cf" path="res://ui/theme/COMIC.TTF" id="11_iax7n"]
 [ext_resource type="Script" path="res://item/item.gd" id="12_f0j5n"]
 [ext_resource type="PackedScene" uid="uid://dbbgg8rrcg6t" path="res://ui/odometer/odometer.tscn" id="12_g0rsr"]
+[ext_resource type="Theme" uid="uid://eovd5sm1pdpq" path="res://ui/theme/theme.tres" id="12_gf4u4"]
 [ext_resource type="Texture2D" uid="uid://cye0w2vncpm8x" path="res://item/glaggler/glaggler_texture.png" id="13_fxit0"]
 [ext_resource type="PackedScene" uid="uid://chx2iumi12qj8" path="res://ui/thermometer/thermometer.tscn" id="13_knkey"]
+[ext_resource type="Shader" uid="uid://cvanwhl3pa162" path="res://assets/psx_no_alpha.tres" id="14_fnov6"]
+[ext_resource type="PackedScene" uid="uid://cq8atjwux5hkq" path="res://ui/compass/compass.tscn" id="18_w4pdl"]
+[ext_resource type="PackedScene" uid="uid://d2x87hbuy1r0x" path="res://ui/mood/mood.tscn" id="19_vxieq"]
+[ext_resource type="PackedScene" uid="uid://b20e3u7q12ao" path="res://ui/leetcode/leetcode.tscn" id="20_mq6xi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cg6b5"]
 render_priority = 0
@@ -49,6 +54,21 @@ sky = SubResource("Sky_oprn1")
 glow_enabled = true
 glow_bloom = 0.35
 
+[sub_resource type="Animation" id="Animation_vj2gi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:environment:sky_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_5oh85"]
 resource_name = "spin"
 loop_mode = 1
@@ -63,21 +83,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_vj2gi"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:environment:sky_rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dlujy"]
@@ -124,32 +129,33 @@ shader_parameter/outerRadius = 2.9
 shader_parameter/MainAlpha = 0.8
 shader_parameter/sanity = 1.0
 
-[sub_resource type="FontVariation" id="FontVariation_6524p"]
-base_font = ExtResource("11_iax7n")
-
-[sub_resource type="Theme" id="Theme_xk38w"]
-default_font = SubResource("FontVariation_6524p")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_no7nd"]
+shader = ExtResource("8_fkqxx")
+shader_parameter/r_displacement = Vector2(1, 0)
+shader_parameter/g_displacement = Vector2(0, 2)
+shader_parameter/b_displacement = Vector2(-2, 0)
+shader_parameter/sanity = 0.5
 
 [sub_resource type="Theme" id="Theme_ce2b0"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_2om03"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_q4c4e"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xyasv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qdpwn"]
 render_priority = 0
-shader = ExtResource("3_nk6hg")
+shader = ExtResource("14_fnov6")
 shader_parameter/jitter = 0.7
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
 shader_parameter/affine_texture_mapping = true
-shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo = ExtResource("13_fxit0")
 
-[sub_resource type="SphereMesh" id="SphereMesh_m7cvt"]
+[sub_resource type="SphereMesh" id="SphereMesh_kfhmb"]
 radius = 0.4
+height = 0.8
 radial_segments = 8
 rings = 6
 
-[sub_resource type="Animation" id="Animation_qr32x"]
+[sub_resource type="Animation" id="Animation_qnppl"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -164,7 +170,7 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_743o6"]
+[sub_resource type="Animation" id="Animation_vwhsa"]
 resource_name = "spin"
 loop_mode = 1
 tracks/0/type = "value"
@@ -180,29 +186,32 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gbgbk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l25v4"]
 _data = {
-"RESET": SubResource("Animation_qr32x"),
-"spin": SubResource("Animation_743o6")
+"RESET": SubResource("Animation_qnppl"),
+"spin": SubResource("Animation_vwhsa")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_no7nd"]
-shader = ExtResource("8_fkqxx")
-shader_parameter/r_displacement = Vector2(1, 0)
-shader_parameter/g_displacement = Vector2(0, 2)
-shader_parameter/b_displacement = Vector2(-3, 0)
-shader_parameter/sanity = 0.5
 
 [node name="Main" type="Node"]
 script = ExtResource("1_pk7a3")
 
 [node name="Player" parent="." instance=ExtResource("1_7i6fg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81901, 0.482756, 0)
+
+[node name="Chunk" parent="." instance=ExtResource("3_mp5cb")]
 
 [node name="Glaggler" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.884495, -0.567893)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64241, 1.07969, -0.567893)
+
+[node name="Glaggler2" parent="." instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.92429, 1.07969, 0.525882)
+
+[node name="Glaggler3" parent="." instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89113, 1.07969, 0.821938)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -1.91862, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_cg6b5")
 mesh = SubResource("PlaneMesh_ee8yi")
 
@@ -222,7 +231,12 @@ autoplay = "spin"
 speed_scale = 0.01
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.638457, 0.745173, 0.192586, -0.0402487, -0.282207, 0.958509, 0.768604, 0.604216, 0.210169, 0, 1.83119, 0)
+transform = Transform3D(-0.638457, 0.745173, 0.192587, -0.238841, -0.429695, 0.870814, 0.731661, 0.50998, 0.45232, 0, 1.83119, 0)
+light_energy = 0.5
+shadow_enabled = true
+shadow_bias = 9.0
+shadow_blur = 0.0
+directional_shadow_mode = 0
 
 [node name="UI" type="Node" parent="."]
 
@@ -270,14 +284,25 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Filter4" type="CanvasLayer" parent="UI"]
+
+[node name="Abberation" type="ColorRect" parent="UI/Filter4" groups=["Sanity"]]
+material = SubResource("ShaderMaterial_no7nd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="HUD" type="CanvasLayer" parent="UI"]
 
 [node name="GlagglerCount" type="Label" parent="UI/HUD"]
-offset_left = 53.0
-offset_top = 17.0
-offset_right = 93.0
-offset_bottom = 40.0
-theme = SubResource("Theme_xk38w")
+offset_left = 47.0
+offset_top = 13.0
+offset_right = 87.0
+offset_bottom = 36.0
+theme = ExtResource("12_gf4u4")
 text = "0/8"
 
 [node name="GlagglerContainer" type="SubViewportContainer" parent="UI/HUD"]
@@ -285,7 +310,7 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = 68.0
 offset_bottom = 68.0
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.7, 0.7)
 theme = SubResource("Theme_ce2b0")
 
 [node name="GlagglerIcon" type="SubViewport" parent="UI/HUD/GlagglerContainer"]
@@ -301,15 +326,15 @@ collision_mask = 0
 script = ExtResource("12_f0j5n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="UI/HUD/GlagglerContainer/GlagglerIcon/Glaggler"]
-shape = SubResource("SphereShape3D_2om03")
+shape = SubResource("SphereShape3D_q4c4e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="UI/HUD/GlagglerContainer/GlagglerIcon/Glaggler"]
-material_override = SubResource("ShaderMaterial_xyasv")
-mesh = SubResource("SphereMesh_m7cvt")
+material_override = SubResource("ShaderMaterial_qdpwn")
+mesh = SubResource("SphereMesh_kfhmb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/HUD/GlagglerContainer/GlagglerIcon/Glaggler"]
 libraries = {
-"": SubResource("AnimationLibrary_gbgbk")
+"": SubResource("AnimationLibrary_l25v4")
 }
 autoplay = "spin"
 speed_scale = 0.5
@@ -318,28 +343,37 @@ speed_scale = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1024, 0.8)
 
 [node name="Odometer" parent="UI/HUD" node_paths=PackedStringArray("player") instance=ExtResource("12_g0rsr")]
-offset_left = -79.0
+offset_left = -91.0
 offset_top = -74.0
-offset_right = 38.0
+offset_right = 26.0
 offset_bottom = 40.0
 scale = Vector2(0.6, 0.6)
 player = NodePath("../../../Player")
 
 [node name="Thermometer" parent="UI/HUD" node_paths=PackedStringArray("player") instance=ExtResource("13_knkey")]
-offset_left = 268.0
-offset_top = 194.0
-offset_right = 332.0
-offset_bottom = 314.0
-scale = Vector2(0.7, 0.7)
+offset_left = 363.0
+offset_top = 3.0
+offset_right = 427.0
+offset_bottom = 123.0
+scale = Vector2(0.5, 0.7)
 player = NodePath("../../../Player")
 
-[node name="Filter4" type="CanvasLayer" parent="UI"]
+[node name="Compass" parent="UI/HUD" node_paths=PackedStringArray("player") instance=ExtResource("18_w4pdl")]
+offset_left = 357.0
+offset_top = 172.0
+offset_right = 485.0
+offset_bottom = 298.0
+scale = Vector2(0.3, 0.3)
+player = NodePath("../../../Player")
 
-[node name="Abberation" type="ColorRect" parent="UI/Filter4" groups=["Sanity"]]
-material = SubResource("ShaderMaterial_no7nd")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="Mood" parent="UI/HUD" instance=ExtResource("19_vxieq")]
+offset_left = 5.0
+offset_top = 193.0
+offset_right = 133.0
+offset_bottom = 321.0
+
+[node name="Leetcode" parent="UI/HUD" instance=ExtResource("20_mq6xi")]
+offset_left = 2.0
+offset_top = 216.0
+offset_right = 1026.0
+offset_bottom = 839.0

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://hjfwyh0n5763"]
+
+[ext_resource type="Shader" uid="uid://cvanwhl3pa162" path="res://assets/psx_no_alpha.tres" id="1_ijpw1"]
+[ext_resource type="Texture2D" uid="uid://s1okawpw30kl" path="res://chunk/texture2.png" id="2_5mf7f"]
+[ext_resource type="Texture2D" uid="uid://dyhwh410wx7mf" path="res://chunk/texture1.png" id="3_ilpwo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_txl7h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vdvpe"]
+render_priority = 0
+shader = ExtResource("1_ijpw1")
+shader_parameter/jitter = 0.4
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/albedo = ExtResource("2_5mf7f")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g0shg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gf0f2"]
+render_priority = 0
+shader = ExtResource("1_ijpw1")
+shader_parameter/jitter = 0.4
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = false
+shader_parameter/affine_texture_mapping = true
+shader_parameter/albedo = ExtResource("3_ilpwo")
+
+[node name="Cubes" type="Node3D"]
+
+[node name="Cube1" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_txl7h")
+surface_material_override/0 = SubResource("ShaderMaterial_vdvpe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube1/StaticBody3D"]
+shape = SubResource("BoxShape3D_g0shg")
+
+[node name="Cube2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+mesh = SubResource("BoxMesh_txl7h")
+surface_material_override/0 = SubResource("ShaderMaterial_gf0f2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube2/StaticBody3D"]
+shape = SubResource("BoxShape3D_g0shg")

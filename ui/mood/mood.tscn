@@ -1,0 +1,25 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2x87hbuy1r0x"]
+
+[ext_resource type="Texture2D" uid="uid://b2gtelfgmrmlr" path="res://ui/mood/smile.svg" id="1_b1d3p"]
+[ext_resource type="Script" path="res://ui/mood/mood.gd" id="2_ecmgo"]
+[ext_resource type="Texture2D" uid="uid://fegohef2ibq5" path="res://ui/mood/cool.svg" id="3_hd7a1"]
+[ext_resource type="Texture2D" uid="uid://cmeq2mxgjnfw8" path="res://ui/mood/cry.svg" id="4_ojy2h"]
+[ext_resource type="Texture2D" uid="uid://bylf5iu42lw18" path="res://ui/mood/sad.svg" id="5_br6s0"]
+[ext_resource type="Texture2D" uid="uid://cp5sqi5cl7kkp" path="res://ui/mood/scared.svg" id="6_86r8i"]
+[ext_resource type="Texture2D" uid="uid://dus3trf57srb3" path="res://ui/mood/heart.svg" id="7_rr2u3"]
+[ext_resource type="Texture2D" uid="uid://dmfu55fphkq7v" path="res://ui/mood/thumbsup.svg" id="8_ysqf8"]
+
+[node name="Mood" type="TextureRect"]
+offset_left = 52.0
+offset_top = 254.0
+offset_right = 180.0
+offset_bottom = 382.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_b1d3p")
+script = ExtResource("2_ecmgo")
+faces = Array[CompressedTexture2D]([ExtResource("3_hd7a1"), ExtResource("4_ojy2h"), ExtResource("5_br6s0"), ExtResource("6_86r8i"), ExtResource("1_b1d3p"), ExtResource("7_rr2u3"), ExtResource("8_ysqf8")])
+min_time = 2.0
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

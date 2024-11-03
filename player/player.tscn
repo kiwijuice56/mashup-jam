@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://player/player.gd" id="1_ejfwy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy03j"]
+height = 1.5
 
 [sub_resource type="Animation" id="Animation_j8cx7"]
 resource_name = "RESET"
@@ -293,6 +294,8 @@ radius = 1.0
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("HEAD", "CAMERA", "HEADBOB_ANIMATION", "JUMP_ANIMATION", "CROUCH_ANIMATION", "COLLISION_MESH")]
 collision_layer = 2
 script = ExtResource("1_ejfwy")
+base_speed = 2.0
+sprint_speed = 4.0
 mouse_sensitivity = 0.5
 HEAD = NodePath("Head")
 CAMERA = NodePath("Head/Camera")
@@ -312,6 +315,7 @@ libraries = {
 }
 
 [node name="Head" type="Node3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera" type="Camera3D" parent="Head"]
