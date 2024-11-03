@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dxll8u1glai8n"]
+[gd_scene load_steps=44 format=3 uid="uid://dxll8u1glai8n"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://player/player.tscn" id="1_7i6fg"]
 [ext_resource type="Script" path="res://main.gd" id="1_pk7a3"]
@@ -11,7 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://dgf45k1y3b2yh" path="res://assets/sky.png" id="6_yyr4t"]
 [ext_resource type="Shader" path="res://assets/pixelation.gdshader" id="8_31ka2"]
 [ext_resource type="Shader" path="res://assets/chromatic.gdshader" id="8_fkqxx"]
+[ext_resource type="FontFile" uid="uid://bs7kc4db545cf" path="res://ui/theme/COMIC.TTF" id="11_iax7n"]
+[ext_resource type="Script" path="res://item/item.gd" id="12_f0j5n"]
 [ext_resource type="PackedScene" uid="uid://dbbgg8rrcg6t" path="res://ui/odometer/odometer.tscn" id="12_g0rsr"]
+[ext_resource type="Texture2D" uid="uid://cye0w2vncpm8x" path="res://item/glaggler/glaggler_texture.png" id="13_fxit0"]
+[ext_resource type="PackedScene" uid="uid://chx2iumi12qj8" path="res://ui/thermometer/thermometer.tscn" id="13_knkey"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cg6b5"]
 render_priority = 0
@@ -120,6 +124,68 @@ shader_parameter/outerRadius = 2.9
 shader_parameter/MainAlpha = 0.8
 shader_parameter/sanity = 1.0
 
+[sub_resource type="FontVariation" id="FontVariation_6524p"]
+base_font = ExtResource("11_iax7n")
+
+[sub_resource type="Theme" id="Theme_xk38w"]
+default_font = SubResource("FontVariation_6524p")
+
+[sub_resource type="Theme" id="Theme_ce2b0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2om03"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xyasv"]
+render_priority = 0
+shader = ExtResource("3_nk6hg")
+shader_parameter/jitter = 0.7
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo = ExtResource("13_fxit0")
+
+[sub_resource type="SphereMesh" id="SphereMesh_m7cvt"]
+radius = 0.4
+radial_segments = 8
+rings = 6
+
+[sub_resource type="Animation" id="Animation_qr32x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_743o6"]
+resource_name = "spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gbgbk"]
+_data = {
+"RESET": SubResource("Animation_qr32x"),
+"spin": SubResource("Animation_743o6")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_no7nd"]
 shader = ExtResource("8_fkqxx")
 shader_parameter/r_displacement = Vector2(1, 0)
@@ -156,13 +222,13 @@ autoplay = "spin"
 speed_scale = 0.01
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.102289, 0.440378, -0.891966, 0.0501729, 0.897812, 0.437511, 0.993489, 0, -0.113931, 0, 1.83119, 0)
+transform = Transform3D(-0.638457, 0.745173, 0.192586, -0.0402487, -0.282207, 0.958509, 0.768604, 0.604216, 0.210169, 0, 1.83119, 0)
 
-[node name="Filters" type="Node" parent="."]
+[node name="UI" type="Node" parent="."]
 
-[node name="Filter1" type="CanvasLayer" parent="Filters"]
+[node name="Filter1" type="CanvasLayer" parent="UI"]
 
-[node name="Filter" type="ColorRect" parent="Filters/Filter1" groups=["Sanity"]]
+[node name="Filter" type="ColorRect" parent="UI/Filter1" groups=["Sanity"]]
 material = SubResource("ShaderMaterial_mvsja")
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,9 +237,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Filter2" type="CanvasLayer" parent="Filters"]
+[node name="Filter2" type="CanvasLayer" parent="UI"]
 
-[node name="Filter2" type="ColorRect" parent="Filters/Filter2" groups=["Sanity"]]
+[node name="Filter2" type="ColorRect" parent="UI/Filter2" groups=["Sanity"]]
 material = SubResource("ShaderMaterial_q57k2")
 anchors_preset = 15
 anchor_right = 1.0
@@ -182,9 +248,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Filter5" type="CanvasLayer" parent="Filters"]
+[node name="Filter5" type="CanvasLayer" parent="UI"]
 
-[node name="Pixelation" type="ColorRect" parent="Filters/Filter5"]
+[node name="Pixelation" type="ColorRect" parent="UI/Filter5"]
 material = SubResource("ShaderMaterial_e5ghy")
 anchors_preset = 15
 anchor_right = 1.0
@@ -193,9 +259,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Filter3" type="CanvasLayer" parent="Filters"]
+[node name="Filter3" type="CanvasLayer" parent="UI"]
 
-[node name="Vignette" type="ColorRect" parent="Filters/Filter3"]
+[node name="Vignette" type="ColorRect" parent="UI/Filter3"]
 material = SubResource("ShaderMaterial_k3hwj")
 anchors_preset = 15
 anchor_right = 1.0
@@ -204,35 +270,72 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="UI" type="CanvasLayer" parent="Filters"]
+[node name="HUD" type="CanvasLayer" parent="UI"]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Filters/UI"]
-offset_right = 64.0
-offset_bottom = 64.0
+[node name="GlagglerCount" type="Label" parent="UI/HUD"]
+offset_left = 53.0
+offset_top = 17.0
+offset_right = 93.0
+offset_bottom = 40.0
+theme = SubResource("Theme_xk38w")
+text = "0/8"
 
-[node name="GlagglerIcon" type="SubViewport" parent="Filters/UI/SubViewportContainer"]
+[node name="GlagglerContainer" type="SubViewportContainer" parent="UI/HUD"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 68.0
+offset_bottom = 68.0
+scale = Vector2(0.8, 0.8)
+theme = SubResource("Theme_ce2b0")
+
+[node name="GlagglerIcon" type="SubViewport" parent="UI/HUD/GlagglerContainer"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(64, 64)
 render_target_update_mode = 4
 
-[node name="Glaggler" parent="Filters/UI/SubViewportContainer/GlagglerIcon" instance=ExtResource("4_oluyo")]
+[node name="Glaggler" type="Area3D" parent="UI/HUD/GlagglerContainer/GlagglerIcon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1024, 0)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("12_f0j5n")
 
-[node name="Camera3D" type="Camera3D" parent="Filters/UI/SubViewportContainer/GlagglerIcon"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UI/HUD/GlagglerContainer/GlagglerIcon/Glaggler"]
+shape = SubResource("SphereShape3D_2om03")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="UI/HUD/GlagglerContainer/GlagglerIcon/Glaggler"]
+material_override = SubResource("ShaderMaterial_xyasv")
+mesh = SubResource("SphereMesh_m7cvt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/HUD/GlagglerContainer/GlagglerIcon/Glaggler"]
+libraries = {
+"": SubResource("AnimationLibrary_gbgbk")
+}
+autoplay = "spin"
+speed_scale = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="UI/HUD/GlagglerContainer/GlagglerIcon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1024, 0.8)
 
-[node name="Odometer" parent="Filters/UI" node_paths=PackedStringArray("player") instance=ExtResource("12_g0rsr")]
-offset_left = -77.0
-offset_top = -79.0
-offset_right = 40.0
-offset_bottom = 35.0
+[node name="Odometer" parent="UI/HUD" node_paths=PackedStringArray("player") instance=ExtResource("12_g0rsr")]
+offset_left = -79.0
+offset_top = -74.0
+offset_right = 38.0
+offset_bottom = 40.0
 scale = Vector2(0.6, 0.6)
 player = NodePath("../../../Player")
 
-[node name="Filter4" type="CanvasLayer" parent="Filters"]
+[node name="Thermometer" parent="UI/HUD" node_paths=PackedStringArray("player") instance=ExtResource("13_knkey")]
+offset_left = 268.0
+offset_top = 194.0
+offset_right = 332.0
+offset_bottom = 314.0
+scale = Vector2(0.7, 0.7)
+player = NodePath("../../../Player")
 
-[node name="Abberation" type="ColorRect" parent="Filters/Filter4" groups=["Sanity"]]
+[node name="Filter4" type="CanvasLayer" parent="UI"]
+
+[node name="Abberation" type="ColorRect" parent="UI/Filter4" groups=["Sanity"]]
 material = SubResource("ShaderMaterial_no7nd")
 anchors_preset = 15
 anchor_right = 1.0
