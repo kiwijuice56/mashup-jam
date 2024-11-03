@@ -4,7 +4,7 @@
 # Quality Godot First Person Controller v2
 
 
-extends CharacterBody3D
+class_name FirstPersonController extends CharacterBody3D
 
 
 ## The settings for the character's movement and feel.
@@ -107,9 +107,6 @@ func _ready():
 	HEAD.rotation.y = rotation.y
 	rotation.y = 0
 	
-	if default_reticle:
-		change_reticle(default_reticle)
-	
 	# Reset the camera position
 	# If you want to change the default head height, change these animations.
 	HEADBOB_ANIMATION.play("RESET")
@@ -146,28 +143,9 @@ func check_controls(): # If you add a control, you might want to add a check for
 		sprint_enabled = false
 
 
-func change_reticle(reticle): # Yup, this function is kinda strange
-	if RETICLE:
-		RETICLE.queue_free()
-	
-	RETICLE = load(reticle).instantiate()
-	RETICLE.character = self
-	$UserInterface.add_child(RETICLE)
-
-
 func _physics_process(delta):
 	# Big thanks to github.com/LorenzoAncora for the concept of the improved debug values
 	current_speed = Vector3.ZERO.distance_to(get_real_velocity())
-	$UserInterface/DebugPanel.add_property("Speed", snappedf(current_speed, 0.001), 1)
-	$UserInterface/DebugPanel.add_property("Target speed", speed, 2)
-	var cv : Vector3 = get_real_velocity()
-	var vd : Array[float] = [
-		snappedf(cv.x, 0.001),
-		snappedf(cv.y, 0.001),
-		snappedf(cv.z, 0.001)
-	]
-	var readable_velocity : String = "X: " + str(vd[0]) + " Y: " + str(vd[1]) + " Z: " + str(vd[2])
-	$UserInterface/DebugPanel.add_property("Velocity", readable_velocity, 3)
 	
 	# Gravity
 	#gravity = ProjectSettings.get_setting("physics/3d/default_gravity") # If the gravity changes during your game, uncomment this code
@@ -216,7 +194,6 @@ func handle_jumping():
 				if jump_animation:
 					JUMP_ANIMATION.play("jump", 0.25)
 				velocity.y += jump_velocity
-
 
 func handle_movement(delta, input_dir):
 	var direction = input_dir.rotated(-HEAD.rotation.y)
@@ -314,7 +291,6 @@ func enter_normal_state():
 
 func enter_crouch_state():
 	#print("entering crouch state")
-	var prev_state = state
 	state = "crouching"
 	speed = crouch_speed
 	CROUCH_ANIMATION.play("crouch")
@@ -363,13 +339,7 @@ func headbob_animation(moving):
 			HEADBOB_ANIMATION.play("RESET", 1)
 
 
-func _process(delta):
-	$UserInterface/DebugPanel.add_property("FPS", Performance.get_monitor(Performance.TIME_FPS), 0)
-	var status : String = state
-	if !is_on_floor():
-		status += " in the air"
-	$UserInterface/DebugPanel.add_property("State", status, 4)
-	
+func _process(_delta):
 	if pausing_enabled:
 		if Input.is_action_just_pressed(PAUSE):
 			# You may want another node to handle pausing, because this player may get paused too.
@@ -386,9 +356,3 @@ func _unhandled_input(event : InputEvent):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		mouseInput.x += event.relative.x
 		mouseInput.y += event.relative.y
-	# Toggle debug menu
-	elif event is InputEventKey:
-		if event.is_released():
-			# Where we're going, we don't need InputMap
-			if event.keycode == 4194338: # F7
-				$UserInterface/DebugPanel.visible = !$UserInterface/DebugPanel.visible

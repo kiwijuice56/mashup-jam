@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dl1tqt3t7htaj"]
+
+[ext_resource type="Shader" path="res://assets/psx.gdshader" id="1_pdkk7"]
+[ext_resource type="Texture2D" uid="uid://cye0w2vncpm8x" path="res://item/glaggler/glaggler_texture.png" id="2_bq3pd"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_pdkk7")
+shader_parameter/jitter = 0.7
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo = ExtResource("2_bq3pd")

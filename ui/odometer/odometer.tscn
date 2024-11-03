@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbbgg8rrcg6t"]
+
+[ext_resource type="Texture2D" uid="uid://bmjkba77lofro" path="res://ui/odometer/odometer.png" id="1_l0ic0"]
+[ext_resource type="Script" path="res://ui/odometer/odometer.gd" id="2_c8hbk"]
+[ext_resource type="Texture2D" uid="uid://cfwcdbh1lcvd3" path="res://ui/odometer/arrow.png" id="3_lyyam"]
+
+[node name="Odometer" type="TextureRect"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -139.0
+offset_top = -129.0
+offset_right = -22.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_l0ic0")
+stretch_mode = 2
+script = ExtResource("2_c8hbk")
+
+[node name="Arrow" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 56.0
+offset_top = 4.0
+offset_right = 61.0
+offset_bottom = 54.0
+rotation = 2.2602
+pivot_offset = Vector2(2, 50)
+texture = ExtResource("3_lyyam")
+stretch_mode = 2
