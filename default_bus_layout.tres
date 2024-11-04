@@ -1,0 +1,16 @@
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://ci86n4us10rjj"]
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_mr7di"]
+resource_name = "Distortion"
+mode = 2
+keep_hf_hz = 20000.0
+drive = 0.68
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_xj8m5"]
+resource_name = "Compressor"
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectDistortion_mr7di")
+bus/0/effect/0/enabled = true
+bus/0/effect/1/effect = SubResource("AudioEffectCompressor_xj8m5")
+bus/0/effect/1/enabled = false

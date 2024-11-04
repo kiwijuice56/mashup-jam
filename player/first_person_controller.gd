@@ -173,6 +173,7 @@ func _physics_process(delta):
 	
 	if jump_animation:
 		if !was_on_floor and is_on_floor(): # The player just landed
+			%LandPlayer.playing = true
 			match randi() % 2: #TODO: Change this to detecting velocity direction
 				0:
 					JUMP_ANIMATION.play("land_left", 0.25)
@@ -324,7 +325,7 @@ func headbob_animation(moving):
 		if HEADBOB_ANIMATION.current_animation == use_headbob_animation:
 			was_playing = true
 		
-		HEADBOB_ANIMATION.play(use_headbob_animation, 0.25)
+		HEADBOB_ANIMATION.play(use_headbob_animation, 0.8)
 		HEADBOB_ANIMATION.speed_scale = (current_speed / base_speed) * 1.75
 		if !was_playing:
 			HEADBOB_ANIMATION.seek(float(randi() % 2)) # Randomize the initial headbob direction

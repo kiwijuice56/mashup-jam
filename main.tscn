@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dxll8u1glai8n"]
+[gd_scene load_steps=54 format=3 uid="uid://dxll8u1glai8n"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://player/player.tscn" id="1_7i6fg"]
 [ext_resource type="Script" path="res://main.gd" id="1_pk7a3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://f7pa85osf5es" path="res://item/glaggler/glaggler.tscn" id="4_oluyo"]
 [ext_resource type="Shader" path="res://assets/filter.gdshader" id="4_unutx"]
 [ext_resource type="Shader" path="res://assets/filter2.gdshader" id="5_bvyy0"]
+[ext_resource type="Texture2D" uid="uid://ijhrexn0pkkt" path="res://assets/tile.png" id="5_t4yhp"]
 [ext_resource type="Shader" path="res://assets/vignette.gdshader" id="6_dhwh1"]
 [ext_resource type="Script" path="res://assets/datamosh/datamosh.gd" id="6_ftwmh"]
 [ext_resource type="Texture2D" uid="uid://dgf45k1y3b2yh" path="res://assets/sky.png" id="6_yyr4t"]
@@ -20,7 +21,61 @@
 [ext_resource type="PackedScene" uid="uid://cq8atjwux5hkq" path="res://ui/compass/compass.tscn" id="18_w4pdl"]
 [ext_resource type="PackedScene" uid="uid://d2x87hbuy1r0x" path="res://ui/mood/mood.tscn" id="19_vxieq"]
 [ext_resource type="PackedScene" uid="uid://b20e3u7q12ao" path="res://ui/leetcode/leetcode.tscn" id="20_mq6xi"]
+[ext_resource type="AudioStream" uid="uid://dqkrv741d8e35" path="res://music/mmp_clouds.mp3" id="22_ie7cl"]
 [ext_resource type="PackedScene" uid="uid://lgpupbeq3kvi" path="res://ui/hunger/hunger_bar.tscn" id="22_vxlme"]
+[ext_resource type="AudioStream" uid="uid://cy11wff8ktbh3" path="res://music/ambiance.ogg" id="23_8cd13"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6tea"]
+render_priority = 0
+shader = ExtResource("14_fnov6")
+shader_parameter/jitter = 0.7
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/albedo = ExtResource("5_t4yhp")
+
+[sub_resource type="TorusMesh" id="TorusMesh_xc7uu"]
+material = SubResource("ShaderMaterial_e6tea")
+inner_radius = 0.6
+rings = 32
+ring_segments = 16
+
+[sub_resource type="Animation" id="Animation_ngaus"]
+resource_name = "spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(6.28319, 0, 6.28319)]
+}
+
+[sub_resource type="Animation" id="Animation_e8bh4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ka6hs"]
+_data = {
+"RESET": SubResource("Animation_e8bh4"),
+"spin": SubResource("Animation_ngaus")
+}
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_uxux6"]
 noise_type = 0
@@ -46,7 +101,7 @@ shader_parameter/noise2 = SubResource("NoiseTexture2D_pmphu")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e5ghy"]
 shader = ExtResource("8_31ka2")
-shader_parameter/fog_color = Color(0, 0, 0, 1)
+shader_parameter/fog_color = Color(0.803325, 0.803325, 0.803325, 1)
 shader_parameter/resolution_downsampling = 1.0
 shader_parameter/bit_depth = 4.0
 
@@ -132,6 +187,7 @@ sky = SubResource("Sky_oprn1")
 glow_enabled = true
 glow_intensity = 0.9
 glow_bloom = 0.5
+volumetric_fog_emission = Color(1, 1, 1, 1)
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_btbg5"]
 resource_local_to_scene = false
@@ -190,14 +246,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.819, 10, 0)
 
 [node name="Chunk" parent="." instance=ExtResource("3_mp5cb")]
 
+[node name="SkyTorus" type="MeshInstance3D" parent="."]
+transform = Transform3D(64, 0, 0, 0, 64, 0, 0, 0, 64, 0, 8.29659, 0)
+mesh = SubResource("TorusMesh_xc7uu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SkyTorus"]
+libraries = {
+"": SubResource("AnimationLibrary_ka6hs")
+}
+autoplay = "spin"
+speed_scale = 0.01
+
 [node name="Glaggler2" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97838, 4, 2.02948)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97838, 7.20527, 2.02948)
 
 [node name="Glaggler3" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945216, 4.47138, 1.67071)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945216, 7.67665, 1.67071)
 
 [node name="Glaggler4" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945216, 4.84328, 0.995164)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945216, 7.02493, 0.121332)
+
+[node name="Glaggler5" parent="." instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5352, 8.16054, -0.367551)
+
+[node name="Glaggler6" parent="." instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50708, 7.59284, 0.853056)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.638457, 0.745173, 0.192587, -0.238841, -0.429695, 0.870814, 0.731661, 0.50998, 0.45232, 0, 1.83119, 0)
@@ -377,3 +450,13 @@ libraries = {
 }
 autoplay = "spin"
 speed_scale = 0.01
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_ie7cl")
+volume_db = -4.0
+autoplay = true
+
+[node name="AmbiancePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_8cd13")
+volume_db = -12.0
+autoplay = true

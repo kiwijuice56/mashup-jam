@@ -1,8 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://cc1m2a1obsyn4"]
+[gd_scene load_steps=21 format=3 uid="uid://cc1m2a1obsyn4"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ejfwy"]
+[ext_resource type="AudioStream" uid="uid://cc1kqtf8hgaoj" path="res://player/step_sounds/step1.ogg" id="2_cu4e7"]
+[ext_resource type="AudioStream" uid="uid://butahfb7wncxs" path="res://player/step_sounds/step2.ogg" id="3_6aqun"]
+[ext_resource type="AudioStream" uid="uid://dligwmp1afvgf" path="res://player/step_sounds/step3.ogg" id="4_aqunp"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy03j"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k4y50"]
 height = 1.5
 
 [sub_resource type="Animation" id="Animation_j8cx7"]
@@ -117,6 +120,18 @@ tracks/1/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%StepPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_8ku67"]
 resource_name = "sprint"
@@ -144,11 +159,24 @@ tracks/1/keys = {
 "points": PackedFloat32Array(0.05, -0.25, 0, 0.2, -0.01, 0, -0.2, 0.000186046, 0.2, 0.000186046, 0.05, -0.2, -0.01, 0.2, -0.01, 0, -0.2, 0, 0.2, 0, 0.05, -0.2, -0.01, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%StepPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
 
 [sub_resource type="Animation" id="Animation_lrqmv"]
 resource_name = "walk"
 length = 2.0
 loop_mode = 1
+step = 0.05
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -170,6 +198,18 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
 "points": PackedFloat32Array(-0.05, -0.25, 0, 0.2, 0.005, 0, -0.2, 0.000186046, 0.2, 0.000186046, -0.05, -0.2, 0.005, 0.2, 0.005, 0, -0.2, 0, 0.2, 0, -0.05, -0.2, 0.005, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%StepPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0408239, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o0unb"]
@@ -286,6 +326,13 @@ _data = {
 "land_right": SubResource("Animation_vsknp")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_x2pwj"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("2_cu4e7")
+stream_1/stream = ExtResource("3_6aqun")
+stream_2/stream = ExtResource("4_aqunp")
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_k4wwl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hl3yv"]
@@ -307,7 +354,7 @@ in_air_momentum = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_uy03j")
+shape = SubResource("CapsuleShape3D_k4y50")
 
 [node name="CrouchAnimation" type="AnimationPlayer" parent="."]
 libraries = {
@@ -331,6 +378,16 @@ libraries = {
 "": SubResource("AnimationLibrary_qeg5r")
 }
 speed_scale = 4.0
+
+[node name="StepPlayer" type="AudioStreamPlayer" parent="Head"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_x2pwj")
+
+[node name="LandPlayer" type="AudioStreamPlayer" parent="Head"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_x2pwj")
+volume_db = 2.0
+pitch_scale = 0.8
 
 [node name="CrouchCeilingDetection" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
