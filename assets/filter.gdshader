@@ -1,14 +1,13 @@
 shader_type canvas_item;
 
-uniform sampler2D noise1: source_color, repeat_enable;
-uniform sampler2D noise2: source_color;
-uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
-uniform float block_size = 32;
+uniform sampler2D noise2: source_color, repeat_enable;
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, repeat_enable, filter_linear_mipmap;
+
 uniform float sanity = 0.5;
 
 void fragment() {
-	float x = mod(texture(noise1, SCREEN_UV + 0.2*vec2(TIME)).r + TIME, SCREEN_UV.x);
-	vec2 snapped = SCREEN_UV + x*mod(SCREEN_UV * 3.0/4.0, 1.0 / block_size);  
-	vec4 anger = (texture(SCREEN_TEXTURE, snapped) + texture(SCREEN_TEXTURE, SCREEN_UV)) / 2.0;
+	highp float x = mod(texture(noise2, SCREEN_UV + 0.1*cos(vec2(0.5 * TIME * (1.0 - sanity)))).r + TIME, 1.0);
+	highp vec2 snapped = UV + x * mod(UV, SCREEN_PIXEL_SIZE * 12.0);  
+	vec4 anger = (textureLod(SCREEN_TEXTURE, snapped, 0.0) + textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0)) / 2.0;
 	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV) * sanity + (1.0 - sanity) * anger;
 }
