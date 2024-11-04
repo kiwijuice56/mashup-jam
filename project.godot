@@ -19,10 +19,14 @@ config/icon="res://icon.svg"
 
 GlobalVariables="*res://global_variables.gd"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
-window/size/viewport_width=400
-window/size/viewport_height=280
+window/size/viewport_width=600
+window/size/viewport_height=370
 window/stretch/mode="viewport"
 
 [global_group]
@@ -109,7 +113,5 @@ sprint={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0

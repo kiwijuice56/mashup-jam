@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cp71nsuchtyb3"
+path="res://.godot/imported/face_cube.obj-3ddbf7ebb1d965c2d9e7427dca6782fa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/face_cube.obj-3ddbf7ebb1d965c2d9e7427dca6782fa.mesh"]
+
+source_file="res://assets/face_cube.obj"
+dest_files=["res://.godot/imported/face_cube.obj-3ddbf7ebb1d965c2d9e7427dca6782fa.mesh", "res://.godot/imported/face_cube.obj-3ddbf7ebb1d965c2d9e7427dca6782fa.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -9,3 +9,6 @@ var sanity: float = 0.5:
 		sanity = val
 
 var glagglers: int = 0 
+
+var datamosh: float = 0.5
+var refresh_frame: bool = true

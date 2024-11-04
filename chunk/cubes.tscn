@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://hjfwyh0n5763"]
+[gd_scene load_steps=9 format=3 uid="uid://hjfwyh0n5763"]
 
 [ext_resource type="Shader" uid="uid://cvanwhl3pa162" path="res://assets/psx_no_alpha.tres" id="1_ijpw1"]
+[ext_resource type="ArrayMesh" uid="uid://cp71nsuchtyb3" path="res://assets/face_cube.obj" id="1_ylpb6"]
 [ext_resource type="Texture2D" uid="uid://s1okawpw30kl" path="res://chunk/texture2.png" id="2_5mf7f"]
 [ext_resource type="Texture2D" uid="uid://dyhwh410wx7mf" path="res://chunk/texture1.png" id="3_ilpwo"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_txl7h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vdvpe"]
 render_priority = 0
@@ -16,6 +15,9 @@ shader_parameter/affine_texture_mapping = true
 shader_parameter/albedo = ExtResource("2_5mf7f")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g0shg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_txl7h"]
+lightmap_size_hint = Vector2i(14, 21)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gf0f2"]
 render_priority = 0
@@ -29,7 +31,7 @@ shader_parameter/albedo = ExtResource("3_ilpwo")
 [node name="Cubes" type="Node3D"]
 
 [node name="Cube1" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_txl7h")
+mesh = ExtResource("1_ylpb6")
 surface_material_override/0 = SubResource("ShaderMaterial_vdvpe")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube1"]
