@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0k3rqtrx5c8b"]
+[gd_scene load_steps=5 format=3 uid="uid://b0k3rqtrx5c8b"]
 
 [ext_resource type="MeshLibrary" uid="uid://trufqexjjvpk" path="res://chunk/cube_library.tres" id="1_cwny7"]
 [ext_resource type="Script" path="res://chunk/chunk.gd" id="1_jh2si"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qu4mn"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u4nyp"]
+noise = SubResource("FastNoiseLite_qu4mn")
 
 [node name="Chunk" type="GridMap"]
 mesh_library = ExtResource("1_cwny7")
@@ -9,8 +15,6 @@ cell_size = Vector3(1, 1, 1)
 cell_center_x = false
 cell_center_y = false
 cell_center_z = false
-data = {
-"cells": PackedInt32Array(0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 2, 1, 1, 3, 0, 1, 4, 0, 1, 2, 2, 1, 3, 1, 1, 4, 1, 1, 3, 2, 1, 2, 0, 1, 2, 65535, 1, 1, 65535, 1, 2, 65534, 1, 3, 65534, 1, 3, 65533, 1, 4, 65534, 1, 4, 65533, 1, 3, 65535, 1, 4, 65535, 1, 4, 2, 1, 5, 1, 1, 6, 1, 1, 6, 0, 1, 6, 65535, 1, 7, 65535, 1, 7, 0, 1, 6, 2, 1, 5, 2, 1, 5, 65533, 1, 6, 65533, 1, 7, 65533, 1, 5, 65534, 1, 6, 65534, 1, 7, 65534, 1, 7, 2, 1, 8, 2, 1, 9, 2, 1, 10, 2, 1, 11, 2, 1, 12, 2, 1, 13, 2, 1, 13, 1, 1, 13, 0, 1, 13, 65535, 1, 13, 65534, 1, 13, 65533, 1, 12, 65533, 1, 12, 65532, 0, 11, 65532, 0, 11, 65533, 1, 10, 65533, 1, 9, 65533, 1, 8, 65533, 1, 7, 1, 1, 7, 65532, 0, 8, 65532, 0, 9, 65532, 0, 10, 65532, 0, 13, 65532, 0, 6, 65532, 0, 5, 65532, 0, 4, 65532, 0, 3, 65532, 0, 2, 65532, 0, 1, 65532, 1, 2, 65533, 1, 1, 65533, 1, 1, 65534, 1, 0, 65534, 1, 0, 65533, 1, 0, 65532, 1, 65535, 65534, 1, 65535, 65535, 1, 65535, 65532, 1, 65535, 65531, 1, 65535, 65533, 1, 65537, 65533, 0, 65537, 65532, 0, 65536, 65532, 0, 131071, 65532, 0, 131071, 65533, 0, 65536, 65533, 0, 65536, 65534, 0, 131071, 65534, 0, 196607, 65532, 0, 131074, 5, 1)
-}
 script = ExtResource("1_jh2si")
-metadata/_editor_floor_ = Vector3(0, 2, 0)
+noise = SubResource("NoiseTexture2D_u4nyp")
+metadata/_editor_floor_ = Vector3(0, 0, 0)
