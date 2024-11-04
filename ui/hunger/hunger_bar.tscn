@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://lgpupbeq3kvi"]
+
+[ext_resource type="Texture2D" uid="uid://c2ookbbe5urow" path="res://ui/hunger/hunger_meter.png" id="1_8xpux"]
+[ext_resource type="Texture2D" uid="uid://iyexto4mrn71" path="res://ui/hunger/hunger_meter2.png" id="2_8gwy1"]
+[ext_resource type="Script" path="res://ui/hunger/hunger_bar.gd" id="3_bo21g"]
+
+[node name="HungerBar" type="TextureProgressBar"]
+offset_left = 37.0
+offset_top = 195.0
+offset_right = 165.0
+offset_bottom = 252.0
+scale = Vector2(0.5, 0.3)
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_under = ExtResource("1_8xpux")
+texture_progress = ExtResource("2_8gwy1")
+script = ExtResource("3_bo21g")

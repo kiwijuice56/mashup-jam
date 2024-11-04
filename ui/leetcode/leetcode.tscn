@@ -22,4 +22,16 @@ offset_top = 190.0
 offset_right = 990.0
 offset_bottom = 500.0
 theme = ExtResource("3_l5kuc")
+theme_override_font_sizes/normal_font_size = 24
+text = "dfsdfsdf"
 scroll_following = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 80.0
+offset_right = 505.0
+offset_bottom = 175.0
+theme = ExtResource("3_l5kuc")
+theme_override_font_sizes/font_size = 50
+text = "leetcode daily"

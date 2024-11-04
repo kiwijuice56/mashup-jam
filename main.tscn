@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dxll8u1glai8n"]
+[gd_scene load_steps=46 format=3 uid="uid://dxll8u1glai8n"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://player/player.tscn" id="1_7i6fg"]
 [ext_resource type="Script" path="res://main.gd" id="1_pk7a3"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cq8atjwux5hkq" path="res://ui/compass/compass.tscn" id="18_w4pdl"]
 [ext_resource type="PackedScene" uid="uid://d2x87hbuy1r0x" path="res://ui/mood/mood.tscn" id="19_vxieq"]
 [ext_resource type="PackedScene" uid="uid://b20e3u7q12ao" path="res://ui/leetcode/leetcode.tscn" id="20_mq6xi"]
+[ext_resource type="PackedScene" uid="uid://lgpupbeq3kvi" path="res://ui/hunger/hunger_bar.tscn" id="22_vxlme"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cg6b5"]
 render_priority = 0
@@ -333,27 +334,33 @@ speed_scale = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1024, 0.8)
 
 [node name="Odometer" parent="UI/HUD" node_paths=PackedStringArray("player") instance=ExtResource("12_g0rsr")]
-offset_left = -91.0
-offset_top = -74.0
-offset_right = 26.0
-offset_bottom = 40.0
+modulate = Color(1, 1, 1, 0.796078)
+offset_left = -84.0
+offset_top = -71.0
+offset_right = 33.0
+offset_bottom = 43.0
 scale = Vector2(0.6, 0.6)
+mouse_filter = 2
 player = NodePath("../../../Player")
 
 [node name="Thermometer" parent="UI/HUD" node_paths=PackedStringArray("player") instance=ExtResource("13_knkey")]
+modulate = Color(1, 1, 1, 0.839216)
 offset_left = 363.0
 offset_top = 3.0
 offset_right = 427.0
 offset_bottom = 123.0
 scale = Vector2(0.5, 0.7)
+mouse_filter = 2
 player = NodePath("../../../Player")
 
 [node name="Compass" parent="UI/HUD" node_paths=PackedStringArray("player") instance=ExtResource("18_w4pdl")]
-offset_left = 357.0
-offset_top = 172.0
-offset_right = 485.0
-offset_bottom = 298.0
+modulate = Color(1, 1, 1, 0.784314)
+offset_left = 359.0
+offset_top = 174.0
+offset_right = 487.0
+offset_bottom = 300.0
 scale = Vector2(0.3, 0.3)
+mouse_filter = 2
 player = NodePath("../../../Player")
 
 [node name="Mood" parent="UI/HUD" instance=ExtResource("19_vxieq")]
@@ -361,9 +368,22 @@ offset_left = 5.0
 offset_top = 193.0
 offset_right = 133.0
 offset_bottom = 321.0
+scale = Vector2(0.2, 0.15)
+mouse_filter = 2
 
 [node name="Leetcode" parent="UI/HUD" instance=ExtResource("20_mq6xi")]
 offset_left = 2.0
 offset_top = 216.0
 offset_right = 1026.0
 offset_bottom = 839.0
+mouse_filter = 2
+
+[node name="HungerBar" parent="UI/HUD" node_paths=PackedStringArray("player") instance=ExtResource("22_vxlme")]
+modulate = Color(1, 1, 1, 0.784314)
+offset_left = 108.0
+offset_top = 259.0
+offset_right = 236.0
+offset_bottom = 316.0
+scale = Vector2(0.6, 0.3)
+mouse_filter = 2
+player = NodePath("../../../Player")
