@@ -1,6 +1,6 @@
 shader_type spatial;
 render_mode vertex_lighting, skip_vertex_transform, 
-			specular_disabled, diffuse_burley;
+			specular_schlick_ggx, diffuse_lambert;
 
 uniform sampler2D albedo: source_color, filter_nearest;
 uniform sampler2D specular: hint_default_black;

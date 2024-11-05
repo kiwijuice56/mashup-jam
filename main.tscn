@@ -21,9 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://cq8atjwux5hkq" path="res://ui/compass/compass.tscn" id="18_w4pdl"]
 [ext_resource type="PackedScene" uid="uid://d2x87hbuy1r0x" path="res://ui/mood/mood.tscn" id="19_vxieq"]
 [ext_resource type="PackedScene" uid="uid://b20e3u7q12ao" path="res://ui/leetcode/leetcode.tscn" id="20_mq6xi"]
-[ext_resource type="AudioStream" uid="uid://dqkrv741d8e35" path="res://music/mmp_clouds.mp3" id="22_ie7cl"]
 [ext_resource type="PackedScene" uid="uid://lgpupbeq3kvi" path="res://ui/hunger/hunger_bar.tscn" id="22_vxlme"]
 [ext_resource type="AudioStream" uid="uid://cy11wff8ktbh3" path="res://music/ambiance.ogg" id="23_8cd13"]
+[ext_resource type="AudioStream" uid="uid://dhfr00mdkxg0v" path="res://music/clouds.ogg" id="23_djpah"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e6tea"]
 render_priority = 0
@@ -36,9 +36,23 @@ shader_parameter/albedo = ExtResource("5_t4yhp")
 
 [sub_resource type="TorusMesh" id="TorusMesh_xc7uu"]
 material = SubResource("ShaderMaterial_e6tea")
-inner_radius = 0.6
 rings = 32
 ring_segments = 16
+
+[sub_resource type="Animation" id="Animation_e8bh4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_ngaus"]
 resource_name = "spin"
@@ -56,12 +70,53 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(6.28319, 0, 6.28319)]
 }
 
-[sub_resource type="Animation" id="Animation_e8bh4"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ka6hs"]
+_data = {
+"RESET": SubResource("Animation_e8bh4"),
+"spin": SubResource("Animation_ngaus")
+}
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hdfj2"]
+panorama = ExtResource("6_yyr4t")
+filter = false
+
+[sub_resource type="Sky" id="Sky_oprn1"]
+sky_material = SubResource("PanoramaSkyMaterial_hdfj2")
+
+[sub_resource type="Environment" id="Environment_1bgnf"]
+background_mode = 2
+sky = SubResource("Sky_oprn1")
+ambient_light_color = Color(0.3703, 0.253, 0.46, 1)
+ambient_light_sky_contribution = 0.3
+tonemap_mode = 2
+tonemap_exposure = 0.75
+glow_enabled = true
+glow_intensity = 0.9
+glow_bloom = 0.5
+volumetric_fog_albedo = Color(0.592157, 0.788235, 0.94902, 1)
+volumetric_fog_emission = Color(0.592157, 0.792157, 0.952941, 1)
+volumetric_fog_sky_affect = 0.104
+adjustment_enabled = true
+adjustment_contrast = 1.2
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_btbg5"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = true
+needs_normal_roughness = false
+script = ExtResource("6_ftwmh")
+
+[sub_resource type="Compositor" id="Compositor_gpf7k"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_btbg5")])
+
+[sub_resource type="Animation" id="Animation_vj2gi"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
+tracks/0/path = NodePath(".:environment:sky_rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -71,10 +126,26 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ka6hs"]
+[sub_resource type="Animation" id="Animation_5oh85"]
+resource_name = "spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:environment:sky_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dlujy"]
 _data = {
-"RESET": SubResource("Animation_e8bh4"),
-"spin": SubResource("Animation_ngaus")
+"RESET": SubResource("Animation_vj2gi"),
+"spin": SubResource("Animation_5oh85")
 }
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_uxux6"]
@@ -174,70 +245,6 @@ _data = {
 "spin": SubResource("Animation_vwhsa")
 }
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hdfj2"]
-panorama = ExtResource("6_yyr4t")
-filter = false
-
-[sub_resource type="Sky" id="Sky_oprn1"]
-sky_material = SubResource("PanoramaSkyMaterial_hdfj2")
-
-[sub_resource type="Environment" id="Environment_1bgnf"]
-background_mode = 2
-sky = SubResource("Sky_oprn1")
-glow_enabled = true
-glow_intensity = 0.9
-glow_bloom = 0.5
-volumetric_fog_emission = Color(1, 1, 1, 1)
-
-[sub_resource type="CompositorEffect" id="CompositorEffect_btbg5"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = true
-needs_normal_roughness = false
-script = ExtResource("6_ftwmh")
-
-[sub_resource type="Compositor" id="Compositor_gpf7k"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_btbg5")])
-
-[sub_resource type="Animation" id="Animation_vj2gi"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:environment:sky_rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_5oh85"]
-resource_name = "spin"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:environment:sky_rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dlujy"]
-_data = {
-"RESET": SubResource("Animation_vj2gi"),
-"spin": SubResource("Animation_5oh85")
-}
-
 [node name="Main" type="Node"]
 script = ExtResource("1_pk7a3")
 
@@ -247,7 +254,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.819, 10, 0)
 [node name="Chunk" parent="." instance=ExtResource("3_mp5cb")]
 
 [node name="SkyTorus" type="MeshInstance3D" parent="."]
-transform = Transform3D(64, 0, 0, 0, 64, 0, 0, 0, 64, 0, 8.29659, 0)
+transform = Transform3D(128, 0, 0, 0, 128, 0, 0, 0, 128, 0, 8.29659, 0)
 mesh = SubResource("TorusMesh_xc7uu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SkyTorus"]
@@ -258,27 +265,37 @@ autoplay = "spin"
 speed_scale = 0.01
 
 [node name="Glaggler2" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97838, 7.20527, 2.02948)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97838, 7.20527, 3.61324)
 
 [node name="Glaggler3" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945216, 7.67665, 1.67071)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945216, 8.31798, 3.25447)
 
 [node name="Glaggler4" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945216, 7.02493, 0.121332)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945216, 7.02493, 1.34272)
 
 [node name="Glaggler5" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5352, 8.16054, -0.367551)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5352, 8.16054, 1.21621)
 
 [node name="Glaggler6" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50708, 7.59284, 0.853056)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50708, 7.59284, 2.43682)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.638457, 0.745173, 0.192587, -0.238841, -0.429695, 0.870814, 0.731661, 0.50998, 0.45232, 0, 1.83119, 0)
-light_energy = 0.5
+transform = Transform3D(-0.91703, 0.394763, -0.0567248, -0.306913, -0.607706, 0.73246, 0.254676, 0.689097, 0.678443, 0, 1.83119, 0)
+light_color = Color(1, 0.984314, 0.905882, 1)
 shadow_enabled = true
 shadow_reverse_cull_face = true
-shadow_blur = 0.0
-directional_shadow_mode = 0
+directional_shadow_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bgnf")
+compositor = SubResource("Compositor_gpf7k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WorldEnvironment"]
+libraries = {
+"": SubResource("AnimationLibrary_dlujy")
+}
+autoplay = "spin"
+speed_scale = 0.01
 
 [node name="UI" type="Node" parent="."]
 
@@ -440,23 +457,12 @@ scale = Vector2(0.6, 0.3)
 mouse_filter = 2
 player = NodePath("../../../Player")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_1bgnf")
-compositor = SubResource("Compositor_gpf7k")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="WorldEnvironment"]
-libraries = {
-"": SubResource("AnimationLibrary_dlujy")
-}
-autoplay = "spin"
-speed_scale = 0.01
-
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("22_ie7cl")
+stream = ExtResource("23_djpah")
 volume_db = -4.0
 autoplay = true
 
 [node name="AmbiancePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_8cd13")
-volume_db = -12.0
+volume_db = -16.0
 autoplay = true

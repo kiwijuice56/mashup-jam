@@ -1,7 +1,7 @@
 class_name Main extends Node
 
 func _process(delta: float) -> void:
-	GlobalVariables.sanity = 0.3
+	GlobalVariables.sanity = 0.55
 	if Input.is_action_pressed("crouch"):
 		AudioServer.get_bus_effect(0, 0).drive = lerp(AudioServer.get_bus_effect(0, 0).drive, 0.75, delta * 3)
 		GlobalVariables.datamosh = lerp(GlobalVariables.datamosh, 1.1, delta * 3)
