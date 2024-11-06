@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dxll8u1glai8n"]
+[gd_scene load_steps=53 format=3 uid="uid://dxll8u1glai8n"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://player/player.tscn" id="1_7i6fg"]
 [ext_resource type="Script" path="res://main.gd" id="1_pk7a3"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://dgf45k1y3b2yh" path="res://assets/sky.png" id="6_yyr4t"]
 [ext_resource type="Shader" path="res://assets/pixelation.gdshader" id="8_31ka2"]
 [ext_resource type="Shader" path="res://assets/chromatic.gdshader" id="8_fkqxx"]
-[ext_resource type="Script" path="res://item/item.gd" id="12_f0j5n"]
 [ext_resource type="PackedScene" uid="uid://dbbgg8rrcg6t" path="res://ui/odometer/odometer.tscn" id="12_g0rsr"]
 [ext_resource type="Theme" uid="uid://eovd5sm1pdpq" path="res://ui/theme/theme.tres" id="12_gf4u4"]
 [ext_resource type="Texture2D" uid="uid://cye0w2vncpm8x" path="res://item/glaggler/glaggler_texture.png" id="13_fxit0"]
@@ -382,7 +381,6 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1024, 0)
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("12_f0j5n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="UI/HUD/GlagglerContainer/GlagglerIcon/Glaggler"]
 shape = SubResource("SphereShape3D_q4c4e")
@@ -459,7 +457,7 @@ player = NodePath("../../../Player")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_djpah")
-volume_db = -4.0
+volume_db = -7.0
 autoplay = true
 
 [node name="AmbiancePlayer" type="AudioStreamPlayer" parent="."]

@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://boto66t1pnymt"]
+[gd_scene load_steps=14 format=3 uid="uid://boto66t1pnymt"]
 
 [ext_resource type="Script" path="res://item/item.gd" id="1_shsuj"]
+[ext_resource type="Texture2D" uid="uid://b2vtol6vp6kni" path="res://item/circle.png" id="2_fv6pa"]
+[ext_resource type="AudioStream" uid="uid://dobtjpchoj06t" path="res://item/ring_ring.ogg" id="3_ua83y"]
+[ext_resource type="AudioStream" uid="uid://f584f1qku8cr" path="res://item/ohmygaw.ogg" id="4_c1n17"]
+[ext_resource type="AudioStream" uid="uid://bk2vshgu7goug" path="res://item/breeeeeiiiiw.ogg" id="5_fpa8q"]
 
 [sub_resource type="Animation" id="Animation_qr32x"]
 length = 0.001
@@ -39,6 +43,77 @@ _data = {
 "spin": SubResource("Animation_743o6")
 }
 
+[sub_resource type="Animation" id="Animation_8gmvg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Circle:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RingPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2m1q4"]
+resource_name = "circle"
+length = 1.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Circle:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RingPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t6t55"]
+_data = {
+"RESET": SubResource("Animation_8gmvg"),
+"circle": SubResource("Animation_2m1q4")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_btouw"]
+radius = 4.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1icks"]
+streams_count = 3
+stream_0/stream = ExtResource("3_ua83y")
+stream_1/stream = ExtResource("4_c1n17")
+stream_2/stream = ExtResource("5_fpa8q")
+
 [node name="Item" type="Area3D"]
 collision_layer = 4
 collision_mask = 0
@@ -52,3 +127,31 @@ libraries = {
 }
 autoplay = "spin"
 speed_scale = 0.5
+
+[node name="BonusAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_t6t55")
+}
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+unique_name_in_owner = true
+
+[node name="PlayerRadiusArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerRadiusArea"]
+shape = SubResource("SphereShape3D_btouw")
+
+[node name="Circle" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_fv6pa")
+
+[node name="RingPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_1icks")
+volume_db = -16.0
+bus = &"CompressedSFX"

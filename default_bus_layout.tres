@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://ci86n4us10rjj"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://ci86n4us10rjj"]
 
 [sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_mr7di"]
 resource_name = "Distortion"
@@ -9,8 +9,23 @@ drive = 0.68
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_xj8m5"]
 resource_name = "Compressor"
 
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_x07mq"]
+resource_name = "Distortion"
+mode = 2
+pre_gain = -8.0
+drive = 0.7
+
 [resource]
+bus/0/send = &"New Bus 2"
 bus/0/effect/0/effect = SubResource("AudioEffectDistortion_mr7di")
 bus/0/effect/0/enabled = true
 bus/0/effect/1/effect = SubResource("AudioEffectCompressor_xj8m5")
 bus/0/effect/1/enabled = false
+bus/1/name = &"CompressedSFX"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectDistortion_x07mq")
+bus/1/effect/0/enabled = true

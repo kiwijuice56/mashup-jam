@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://cc1m2a1obsyn4"]
+[gd_scene load_steps=23 format=3 uid="uid://cc1m2a1obsyn4"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ejfwy"]
 [ext_resource type="AudioStream" uid="uid://cc1kqtf8hgaoj" path="res://player/step_sounds/step1.ogg" id="2_cu4e7"]
 [ext_resource type="AudioStream" uid="uid://butahfb7wncxs" path="res://player/step_sounds/step2.ogg" id="3_6aqun"]
 [ext_resource type="AudioStream" uid="uid://dligwmp1afvgf" path="res://player/step_sounds/step3.ogg" id="4_aqunp"]
+[ext_resource type="AudioStream" uid="uid://dv26x4t6i5hvt" path="res://player/jump.ogg" id="5_de80a"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k4y50"]
 height = 1.5
@@ -248,7 +249,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_s07ye"]
 resource_name = "jump"
-length = 3.0
+length = 1.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -333,6 +334,11 @@ stream_0/stream = ExtResource("2_cu4e7")
 stream_1/stream = ExtResource("3_6aqun")
 stream_2/stream = ExtResource("4_aqunp")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_a2xdr"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("5_de80a")
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_k4wwl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hl3yv"]
@@ -388,6 +394,11 @@ unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_x2pwj")
 volume_db = 2.0
 pitch_scale = 0.8
+
+[node name="JumpPlayer" type="AudioStreamPlayer" parent="Head"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_a2xdr")
+volume_db = -8.0
 
 [node name="CrouchCeilingDetection" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
