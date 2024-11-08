@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dxll8u1glai8n"]
+[gd_scene load_steps=54 format=3 uid="uid://dxll8u1glai8n"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://player/player.tscn" id="1_7i6fg"]
 [ext_resource type="Script" path="res://main.gd" id="1_pk7a3"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cq8atjwux5hkq" path="res://ui/compass/compass.tscn" id="18_w4pdl"]
 [ext_resource type="PackedScene" uid="uid://d2x87hbuy1r0x" path="res://ui/mood/mood.tscn" id="19_vxieq"]
 [ext_resource type="PackedScene" uid="uid://b20e3u7q12ao" path="res://ui/leetcode/leetcode.tscn" id="20_mq6xi"]
+[ext_resource type="PackedScene" uid="uid://dw4q8yf7ityps" path="res://ui/videos/brainrot_player.tscn" id="22_2lw2y"]
 [ext_resource type="PackedScene" uid="uid://lgpupbeq3kvi" path="res://ui/hunger/hunger_bar.tscn" id="22_vxlme"]
 [ext_resource type="AudioStream" uid="uid://cy11wff8ktbh3" path="res://music/ambiance.ogg" id="23_8cd13"]
 [ext_resource type="AudioStream" uid="uid://dhfr00mdkxg0v" path="res://music/clouds.ogg" id="23_djpah"]
@@ -265,18 +266,31 @@ speed_scale = 0.01
 
 [node name="Glaggler2" parent="." instance=ExtResource("4_oluyo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97838, 7.20527, 3.61324)
+chance = 0.6
 
 [node name="Glaggler3" parent="." instance=ExtResource("4_oluyo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945216, 8.31798, 3.25447)
+chance = 0.6
+
+[node name="Glaggler7" parent="." instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21878, 7.09789, 2.43936)
+chance = 0.6
+
+[node name="Glaggler8" parent="." instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185619, 8.2106, 2.08059)
+chance = 0.6
 
 [node name="Glaggler4" parent="." instance=ExtResource("4_oluyo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945216, 7.02493, 1.34272)
+chance = 0.6
 
 [node name="Glaggler5" parent="." instance=ExtResource("4_oluyo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5352, 8.16054, 1.21621)
+chance = 0.6
 
 [node name="Glaggler6" parent="." instance=ExtResource("4_oluyo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50708, 7.59284, 2.43682)
+chance = 0.6
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.91703, 0.394763, -0.0567248, -0.306913, -0.607706, 0.73246, 0.254676, 0.689097, 0.678443, 0, 1.83119, 0)
@@ -455,9 +469,15 @@ scale = Vector2(0.6, 0.3)
 mouse_filter = 2
 player = NodePath("../../../Player")
 
+[node name="BrainrotPlayer" parent="UI/HUD" instance=ExtResource("22_2lw2y")]
+offset_left = 449.0
+offset_top = 13.0
+offset_right = 559.0
+offset_bottom = 80.0
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_djpah")
-volume_db = -7.0
+volume_db = -12.0
 autoplay = true
 
 [node name="AmbiancePlayer" type="AudioStreamPlayer" parent="."]

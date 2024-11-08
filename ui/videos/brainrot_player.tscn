@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3 uid="uid://dw4q8yf7ityps"]
+
+[ext_resource type="VideoStream" path="res://ui/videos/compromise.ogv" id="1_gxiwp"]
+[ext_resource type="Script" path="res://ui/videos/brainrot_player.gd" id="2_a2uih"]
+[ext_resource type="VideoStream" path="res://ui/videos/itellyouwhat.ogv" id="3_uqlco"]
+[ext_resource type="VideoStream" path="res://ui/videos/win.ogv" id="4_l7441"]
+[ext_resource type="VideoStream" path="res://ui/videos/pou.ogv" id="5_uirtq"]
+[ext_resource type="VideoStream" path="res://ui/videos/kittykats.ogv" id="6_ird7h"]
+[ext_resource type="VideoStream" path="res://ui/videos/rahhh.ogv" id="7_udrsh"]
+
+[node name="BrainrotPlayer" type="VideoStreamPlayer"]
+offset_left = 418.0
+offset_top = 65.0
+offset_right = 520.0
+offset_bottom = 121.0
+stream = ExtResource("1_gxiwp")
+volume_db = -40.0
+expand = true
+bus = &"Video"
+script = ExtResource("2_a2uih")
+videos = Array[VideoStreamTheora]([ExtResource("1_gxiwp"), ExtResource("3_uqlco"), ExtResource("4_l7441"), ExtResource("5_uirtq"), ExtResource("6_ird7h"), ExtResource("7_udrsh")])

@@ -118,6 +118,7 @@ stream_2/stream = ExtResource("5_fpa8q")
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_shsuj")
+chance = 0.4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 

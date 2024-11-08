@@ -15,4 +15,3 @@ func _on_player_entered(body: PhysicsBody3D) -> void:
 
 func show_circle() -> void:
 	%Circle.position = get_viewport().get_camera_3d().unproject_position(global_transform.origin)
-	
