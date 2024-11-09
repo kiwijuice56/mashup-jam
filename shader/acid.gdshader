@@ -1,6 +1,8 @@
 shader_type spatial;
 render_mode depth_prepass_alpha;
 
+uniform float sanity = 0.5;
+uniform sampler2D building_texture: source_color;
 uniform sampler2D noise_texture: source_color;
 uniform sampler2D screen_texture: source_color, hint_screen_texture;
 uniform float speed = 0.5;
@@ -24,6 +26,6 @@ void fragment() {
 
 	col = cos((col.xyz + vec3(0.3 + 0.1*TIME*speed, 0.7 + 0.02*TIME*speed, 1.5 + 0.1 * TIME*speed)) * 100.) * 0.5 + 0.5;
 	col = floor(col * 5.0) / 5.0;
-	ALBEDO = col;
-	}
+	ALBEDO = texture(building_texture, UV).rgb * sanity + (1.0 - sanity) * col;
+}
 

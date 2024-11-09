@@ -1,10 +1,12 @@
 extends Node
 
-var sanity: float = 0.5: 
+var sanity: float = 1.0: 
 	set(val):
 		for node in get_tree().get_nodes_in_group("Sanity"):
 			if node is ColorRect:
 				node.material.set_shader_parameter("sanity", val)
+			if node is MeshInstance3D:
+				node.get("surface_material_override/0").set("shader_parameter/sanity", val)
 		
 		sanity = val
 
