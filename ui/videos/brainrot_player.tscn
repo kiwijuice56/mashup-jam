@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dw4q8yf7ityps"]
+[gd_scene load_steps=15 format=3 uid="uid://dw4q8yf7ityps"]
 
 [ext_resource type="VideoStream" path="res://ui/videos/compromise.ogv" id="1_gxiwp"]
 [ext_resource type="Script" path="res://ui/videos/brainrot_player.gd" id="2_a2uih"]
@@ -7,6 +7,13 @@
 [ext_resource type="VideoStream" path="res://ui/videos/pou.ogv" id="5_uirtq"]
 [ext_resource type="VideoStream" path="res://ui/videos/kittykats.ogv" id="6_ird7h"]
 [ext_resource type="VideoStream" path="res://ui/videos/rahhh.ogv" id="7_udrsh"]
+[ext_resource type="VideoStream" path="res://ui/videos/asburdbeavior.ogv" id="8_rspwa"]
+[ext_resource type="VideoStream" path="res://ui/videos/chinesegodfatha.ogv" id="9_w7nvb"]
+[ext_resource type="VideoStream" path="res://ui/videos/dysphoria.ogv" id="10_tme58"]
+[ext_resource type="VideoStream" path="res://ui/videos/glagglelandmassacre.ogv" id="11_3y4h5"]
+[ext_resource type="VideoStream" path="res://ui/videos/nowthatdbeinteresting.ogv" id="12_cq84p"]
+[ext_resource type="VideoStream" path="res://ui/videos/sowwy.ogv" id="13_stv34"]
+[ext_resource type="VideoStream" path="res://ui/videos/thisisosaka.ogv" id="14_olbnl"]
 
 [node name="BrainrotPlayer" type="VideoStreamPlayer"]
 offset_left = 418.0
@@ -14,8 +21,7 @@ offset_top = 65.0
 offset_right = 520.0
 offset_bottom = 121.0
 stream = ExtResource("1_gxiwp")
-volume_db = -40.0
 expand = true
 bus = &"Video"
 script = ExtResource("2_a2uih")
-videos = Array[VideoStreamTheora]([ExtResource("1_gxiwp"), ExtResource("3_uqlco"), ExtResource("4_l7441"), ExtResource("5_uirtq"), ExtResource("6_ird7h"), ExtResource("7_udrsh")])
+videos = Array[VideoStreamTheora]([ExtResource("1_gxiwp"), ExtResource("3_uqlco"), ExtResource("4_l7441"), ExtResource("5_uirtq"), ExtResource("6_ird7h"), ExtResource("7_udrsh"), ExtResource("8_rspwa"), ExtResource("9_w7nvb"), ExtResource("10_tme58"), ExtResource("11_3y4h5"), ExtResource("12_cq84p"), ExtResource("13_stv34"), ExtResource("14_olbnl")])

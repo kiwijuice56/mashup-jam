@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dxll8u1glai8n"]
+[gd_scene load_steps=55 format=3 uid="uid://dxll8u1glai8n"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://player/player.tscn" id="1_7i6fg"]
 [ext_resource type="Script" path="res://main.gd" id="1_pk7a3"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://lgpupbeq3kvi" path="res://ui/hunger/hunger_bar.tscn" id="22_vxlme"]
 [ext_resource type="AudioStream" uid="uid://cy11wff8ktbh3" path="res://music/ambiance.ogg" id="23_8cd13"]
 [ext_resource type="AudioStream" uid="uid://dhfr00mdkxg0v" path="res://music/clouds.ogg" id="23_djpah"]
+[ext_resource type="Texture2D" uid="uid://dnjfkt6t1y1vt" path="res://ui/videos/tv.png" id="23_y174y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e6tea"]
 render_priority = 0
@@ -444,11 +445,11 @@ mouse_filter = 2
 player = NodePath("../../../Player")
 
 [node name="Mood" parent="UI/HUD" instance=ExtResource("19_vxieq")]
-offset_left = 6.0
-offset_top = 268.0
-offset_right = 134.0
-offset_bottom = 396.0
-scale = Vector2(0.2, 0.15)
+offset_left = 7.0
+offset_top = 261.0
+offset_right = 135.0
+offset_bottom = 389.0
+scale = Vector2(0.3, 0.2)
 mouse_filter = 2
 
 [node name="Leetcode" parent="UI/HUD" instance=ExtResource("20_mq6xi")]
@@ -469,11 +470,19 @@ scale = Vector2(0.6, 0.3)
 mouse_filter = 2
 player = NodePath("../../../Player")
 
+[node name="TV" type="TextureRect" parent="UI/HUD"]
+offset_left = 432.0
+offset_top = -33.0
+offset_right = 969.0
+offset_bottom = 474.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("23_y174y")
+
 [node name="BrainrotPlayer" parent="UI/HUD" instance=ExtResource("22_2lw2y")]
-offset_left = 449.0
-offset_top = 13.0
-offset_right = 559.0
-offset_bottom = 80.0
+offset_left = 453.0
+offset_top = 21.0
+offset_right = 521.0
+offset_bottom = 69.0
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_djpah")
@@ -482,5 +491,5 @@ autoplay = true
 
 [node name="AmbiancePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_8cd13")
-volume_db = -16.0
+volume_db = -22.0
 autoplay = true

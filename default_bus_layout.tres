@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://ci86n4us10rjj"]
+[gd_resource type="AudioBusLayout" load_steps=8 format=3 uid="uid://ci86n4us10rjj"]
 
 [sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_mr7di"]
 resource_name = "Distortion"
@@ -15,9 +15,14 @@ mode = 2
 pre_gain = -8.0
 drive = 0.55
 
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_y32mb"]
+resource_name = "Limiter"
+ceiling_db = -20.0
+threshold_db = -16.0
+
 [sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_3wxqu"]
 resource_name = "PitchShift"
-pitch_scale = 3.0
+pitch_scale = 2.0
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_nwfey"]
 resource_name = "Reverb"
@@ -26,7 +31,7 @@ resource_name = "Reverb"
 resource_name = "Distortion"
 mode = 2
 pre_gain = -4.0
-drive = 0.4
+drive = 0.2
 
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectDistortion_mr7di")
@@ -45,11 +50,13 @@ bus/2/name = &"Video"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = 0.0
+bus/2/volume_db = -26.8914
 bus/2/send = &"Master"
-bus/2/effect/0/effect = SubResource("AudioEffectPitchShift_3wxqu")
+bus/2/effect/0/effect = SubResource("AudioEffectLimiter_y32mb")
 bus/2/effect/0/enabled = true
-bus/2/effect/1/effect = SubResource("AudioEffectReverb_nwfey")
+bus/2/effect/1/effect = SubResource("AudioEffectPitchShift_3wxqu")
 bus/2/effect/1/enabled = true
-bus/2/effect/2/effect = SubResource("AudioEffectDistortion_fcctn")
+bus/2/effect/2/effect = SubResource("AudioEffectReverb_nwfey")
 bus/2/effect/2/enabled = true
+bus/2/effect/3/effect = SubResource("AudioEffectDistortion_fcctn")
+bus/2/effect/3/enabled = true
