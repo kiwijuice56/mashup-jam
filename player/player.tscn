@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cc1m2a1obsyn4"]
+[gd_scene load_steps=24 format=3 uid="uid://cc1m2a1obsyn4"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ejfwy"]
 [ext_resource type="AudioStream" uid="uid://cc1kqtf8hgaoj" path="res://player/step_sounds/step1.ogg" id="2_cu4e7"]
@@ -344,6 +344,8 @@ stream_0/stream = ExtResource("5_de80a")
 [sub_resource type="SphereShape3D" id="SphereShape3D_hl3yv"]
 radius = 1.0
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7mxvg"]
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("HEAD", "CAMERA", "HEADBOB_ANIMATION", "JUMP_ANIMATION", "CROUCH_ANIMATION", "COLLISION_MESH")]
 collision_layer = 2
 script = ExtResource("1_ejfwy")
@@ -413,3 +415,8 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollectBubble"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.719709, 0)
 shape = SubResource("SphereShape3D_hl3yv")
+
+[node name="ShadowCaster" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.647412, 0)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_7mxvg")
