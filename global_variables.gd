@@ -1,5 +1,7 @@
 extends Node
 
+signal glagglers_changed
+
 var sanity: float = 1.0: 
 	set(val):
 		for node in get_tree().get_nodes_in_group("Sanity"):
@@ -10,7 +12,10 @@ var sanity: float = 1.0:
 		
 		sanity = val
 
-var glagglers: int = 0 
+var glagglers: int = 0:
+	set(val):
+		glagglers = val
+		glagglers_changed.emit()
 
 var datamosh: float = 0.5
 var refresh_frame: bool = true

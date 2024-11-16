@@ -27,5 +27,6 @@ rings = 6
 shape = SubResource("SphereShape3D_2om03")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_xyasv")
 mesh = SubResource("SphereMesh_m7cvt")

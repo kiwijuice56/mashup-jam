@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dxll8u1glai8n"]
+[gd_scene load_steps=59 format=3 uid="uid://dxll8u1glai8n"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://player/player.tscn" id="1_7i6fg"]
 [ext_resource type="Script" path="res://main.gd" id="1_pk7a3"]
@@ -11,11 +11,15 @@
 [ext_resource type="Texture2D" uid="uid://dgf45k1y3b2yh" path="res://shader/sky.png" id="6_yyr4t"]
 [ext_resource type="Shader" path="res://shader/pixelation.gdshader" id="8_31ka2"]
 [ext_resource type="Shader" path="res://shader/chromatic.gdshader" id="8_fkqxx"]
+[ext_resource type="Script" path="res://ui/glaggler_count.gd" id="8_ro2om"]
 [ext_resource type="PackedScene" uid="uid://dbbgg8rrcg6t" path="res://ui/odometer/odometer.tscn" id="12_g0rsr"]
 [ext_resource type="Theme" uid="uid://eovd5sm1pdpq" path="res://ui/theme/theme.tres" id="12_gf4u4"]
 [ext_resource type="Texture2D" uid="uid://cye0w2vncpm8x" path="res://item/glaggler/glaggler_texture.png" id="13_fxit0"]
 [ext_resource type="PackedScene" uid="uid://chx2iumi12qj8" path="res://ui/thermometer/thermometer.tscn" id="13_knkey"]
 [ext_resource type="Shader" uid="uid://cvanwhl3pa162" path="res://shader/psx_no_alpha.tres" id="14_fnov6"]
+[ext_resource type="Texture2D" uid="uid://dtdsvkgohio30" path="res://ui/glagglee.png" id="14_m2dyc"]
+[ext_resource type="Texture2D" uid="uid://dt6vjeceea22c" path="res://ui/phone.png" id="17_emq2a"]
+[ext_resource type="VideoStream" path="res://ui/videos/subway_urfer.ogv" id="18_ks6xc"]
 [ext_resource type="PackedScene" uid="uid://cq8atjwux5hkq" path="res://ui/compass/compass.tscn" id="18_w4pdl"]
 [ext_resource type="PackedScene" uid="uid://d2x87hbuy1r0x" path="res://ui/mood/mood.tscn" id="19_vxieq"]
 [ext_resource type="PackedScene" uid="uid://b20e3u7q12ao" path="res://ui/leetcode/leetcode.tscn" id="20_mq6xi"]
@@ -315,6 +319,7 @@ offset_right = 87.0
 offset_bottom = 36.0
 theme = ExtResource("12_gf4u4")
 text = "0/8"
+script = ExtResource("8_ro2om")
 
 [node name="GlagglerContainer" type="SubViewportContainer" parent="UI/HUD"]
 offset_left = 4.0
@@ -372,7 +377,7 @@ scale = Vector2(0.5, 0.7)
 mouse_filter = 2
 player = NodePath("../../../Player")
 
-[node name="Compass" parent="UI/HUD" node_paths=PackedStringArray("player") instance=ExtResource("18_w4pdl")]
+[node name="Compass" parent="UI/HUD" node_paths=PackedStringArray("player", "glagglers") instance=ExtResource("18_w4pdl")]
 modulate = Color(1, 1, 1, 0.784314)
 offset_left = 474.0
 offset_top = 277.0
@@ -381,6 +386,95 @@ offset_bottom = 403.0
 scale = Vector2(0.3, 0.3)
 mouse_filter = 2
 player = NodePath("../../../Player")
+glagglers = NodePath("../../../Glagglers")
+
+[node name="Glaggler1" type="TextureRect" parent="UI/HUD/Compass"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 63.3333
+offset_right = 190.0
+offset_bottom = 103.333
+rotation = -0.363028
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(-84, 0)
+texture = ExtResource("14_m2dyc")
+
+[node name="Glaggler2" type="TextureRect" parent="UI/HUD/Compass"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 63.3333
+offset_right = 190.0
+offset_bottom = 103.333
+rotation = -0.363028
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(-84, 0)
+texture = ExtResource("14_m2dyc")
+
+[node name="Glaggler3" type="TextureRect" parent="UI/HUD/Compass"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 63.3333
+offset_right = 190.0
+offset_bottom = 103.333
+rotation = -0.363028
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(-84, 0)
+texture = ExtResource("14_m2dyc")
+
+[node name="Glaggler4" type="TextureRect" parent="UI/HUD/Compass"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 63.3333
+offset_right = 190.0
+offset_bottom = 103.333
+rotation = -0.363028
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(-84, 0)
+texture = ExtResource("14_m2dyc")
+
+[node name="Glaggler5" type="TextureRect" parent="UI/HUD/Compass"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 63.3333
+offset_right = 190.0
+offset_bottom = 103.333
+rotation = -0.363028
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(-84, 0)
+texture = ExtResource("14_m2dyc")
+
+[node name="Glaggler6" type="TextureRect" parent="UI/HUD/Compass"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 63.3333
+offset_right = 190.0
+offset_bottom = 103.333
+rotation = -0.363028
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(-84, 0)
+texture = ExtResource("14_m2dyc")
+
+[node name="Glaggler7" type="TextureRect" parent="UI/HUD/Compass"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 63.3333
+offset_right = 190.0
+offset_bottom = 103.333
+rotation = -0.363028
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(-84, 0)
+texture = ExtResource("14_m2dyc")
+
+[node name="Glaggler8" type="TextureRect" parent="UI/HUD/Compass"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 63.3333
+offset_right = 190.0
+offset_bottom = 103.333
+rotation = -0.363028
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(-84, 0)
+texture = ExtResource("14_m2dyc")
 
 [node name="Mood" parent="UI/HUD" instance=ExtResource("19_vxieq")]
 offset_left = 7.0
@@ -416,6 +510,26 @@ offset_bottom = 474.0
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("23_y174y")
 
+[node name="Phone" type="TextureRect" parent="UI/HUD"]
+offset_left = -28.0
+offset_top = 135.0
+offset_right = 509.0
+offset_bottom = 642.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("17_emq2a")
+
+[node name="UbwayUrferPlayer" type="VideoStreamPlayer" parent="UI/HUD"]
+offset_left = 15.0
+offset_top = 146.0
+offset_right = 623.0
+offset_bottom = 1426.0
+scale = Vector2(0.085, 0.082)
+stream = ExtResource("18_ks6xc")
+volume_db = 16.0
+autoplay = true
+loop = true
+bus = &"Video"
+
 [node name="BrainrotPlayer" parent="UI/HUD" instance=ExtResource("22_2lw2y")]
 offset_left = 453.0
 offset_top = 21.0
@@ -425,52 +539,62 @@ offset_bottom = 69.0
 [node name="Player" parent="." instance=ExtResource("1_7i6fg")]
 transform = Transform3D(0.60035, 0, -0.799737, 0, 1, 0, 0.799737, 0, 0.60035, 6.06591, -48.7545, 1.55799)
 
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Glagglers" type="Node3D" parent="."]
+
+[node name="Glaggler6" parent="Glagglers" instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.03271, -83.8705, 6.02983)
+chance = 0.6
+
+[node name="Glaggler7" parent="Glagglers" instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.6167, -83.8705, 137.707)
+chance = 0.6
+
+[node name="Glaggler8" parent="Glagglers" instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.963, -70.3552, 43.2864)
+chance = 0.6
+
+[node name="Glaggler9" parent="Glagglers" instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9724, -83.9599, -112.802)
+chance = 0.6
+
+[node name="Glaggler10" parent="Glagglers" instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -269.579, -78.9991, -17.7507)
+chance = 0.6
+
+[node name="Glaggler11" parent="Glagglers" instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -269.579, -78.4576, 276.753)
+chance = 0.6
+
+[node name="Glaggler12" parent="Glagglers" instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.9891, -78.4576, 328.035)
+chance = 0.6
+
+[node name="Glaggler13" parent="Glagglers" instance=ExtResource("4_oluyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.074, -67.9501, -4.30298)
+chance = 0.6
+
 [node name="WorldMap" parent="." instance=ExtResource("4_h2vsi")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -184, 0)
 
-[node name="SkyTorus" type="MeshInstance3D" parent="."]
-transform = Transform3D(128, 0, 0, 0, 128, 0, 0, 0, 128, 0, 215.274, 0)
+[node name="SkyTorus" type="MeshInstance3D" parent="WorldMap"]
+transform = Transform3D(256, 0, 0, 0, 256, 0, 0, 0, 256, 0, 798.548, 0)
 mesh = SubResource("TorusMesh_xc7uu")
+skeleton = NodePath("../..")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SkyTorus"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WorldMap/SkyTorus"]
 libraries = {
 "": SubResource("AnimationLibrary_ka6hs")
 }
 autoplay = "spin"
 speed_scale = 0.01
 
-[node name="Glaggler2" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.50401, -50.0966, 3.61324)
-chance = 0.6
-
-[node name="Glaggler3" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.47084, -48.9838, 3.25447)
-chance = 0.6
-
-[node name="Glaggler7" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.74441, -50.2039, 2.43936)
-chance = 0.6
-
-[node name="Glaggler8" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.71124, -49.0912, 2.08059)
-chance = 0.6
-
-[node name="Glaggler4" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.47084, -50.2769, 1.34272)
-chance = 0.6
-
-[node name="Glaggler5" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0608, -49.1413, 1.21621)
-chance = 0.6
-
-[node name="Glaggler6" parent="." instance=ExtResource("4_oluyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.03271, -49.709, 2.43682)
-chance = 0.6
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.91703, 0.394763, -0.0567248, -0.306913, -0.607706, 0.73246, 0.254676, 0.689097, 0.678443, 0, 1.83119, 0)
 light_color = Color(1, 0.984314, 0.905882, 1)
 shadow_enabled = true
+shadow_bias = 0.0
 shadow_reverse_cull_face = true
 directional_shadow_mode = 1
 

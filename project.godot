@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="mashup-jam"
+config/name="brain-simulator-64"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://ui/glagglee.png"
 
 [autoload]
 
@@ -108,7 +108,7 @@ sprint={
 
 [physics]
 
-3d/default_gravity=11.0
+3d/default_gravity=13.0
 
 [rendering]
 

@@ -349,8 +349,11 @@ radius = 1.0
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("HEAD", "CAMERA", "HEADBOB_ANIMATION", "JUMP_ANIMATION", "CROUCH_ANIMATION", "COLLISION_MESH")]
 collision_layer = 2
 script = ExtResource("1_ejfwy")
-base_speed = 2.0
-sprint_speed = 4.0
+teleport_min = 8.0
+teleport_max = 45.0
+base_speed = 6.0
+sprint_speed = 10.0
+jump_velocity = 14.0
 mouse_sensitivity = 0.5
 HEAD = NodePath("Head")
 CAMERA = NodePath("Head/Camera")
@@ -420,3 +423,11 @@ shape = SubResource("SphereShape3D_hl3yv")
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.04629, 0)
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_7mxvg")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CapsuleShape3D_k4y50")
+target_position = Vector3(0, 1, 0)
+
+[node name="TeleportTimer" type="Timer" parent="."]
+unique_name_in_owner = true
