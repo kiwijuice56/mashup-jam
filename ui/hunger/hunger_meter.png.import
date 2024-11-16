@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2ookbbe5urow"
 path.s3tc="res://.godot/imported/hunger_meter.png-72ced2e16057ff9fe86179f2424e4cbe.s3tc.ctex"
+path.etc2="res://.godot/imported/hunger_meter.png-72ced2e16057ff9fe86179f2424e4cbe.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://ui/hunger/hunger_meter.png"
-dest_files=["res://.godot/imported/hunger_meter.png-72ced2e16057ff9fe86179f2424e4cbe.s3tc.ctex"]
+dest_files=["res://.godot/imported/hunger_meter.png-72ced2e16057ff9fe86179f2424e4cbe.s3tc.ctex", "res://.godot/imported/hunger_meter.png-72ced2e16057ff9fe86179f2424e4cbe.etc2.ctex"]
 
 [params]
 

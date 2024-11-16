@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cmeq2mxgjnfw8"
 path.s3tc="res://.godot/imported/cry.svg-6b69a87b0426441a2bdf807fa7ff7b5e.s3tc.ctex"
+path.etc2="res://.godot/imported/cry.svg-6b69a87b0426441a2bdf807fa7ff7b5e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://ui/mood/cry.svg"
-dest_files=["res://.godot/imported/cry.svg-6b69a87b0426441a2bdf807fa7ff7b5e.s3tc.ctex"]
+dest_files=["res://.godot/imported/cry.svg-6b69a87b0426441a2bdf807fa7ff7b5e.s3tc.ctex", "res://.godot/imported/cry.svg-6b69a87b0426441a2bdf807fa7ff7b5e.etc2.ctex"]
 
 [params]
 

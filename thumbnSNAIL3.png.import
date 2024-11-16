@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://drwcsk5mlwmak"
 path.s3tc="res://.godot/imported/thumbnSNAIL3.png-aa1c7d094b106ad26a0fb89516782fea.s3tc.ctex"
+path.etc2="res://.godot/imported/thumbnSNAIL3.png-aa1c7d094b106ad26a0fb89516782fea.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://thumbnSNAIL3.png"
-dest_files=["res://.godot/imported/thumbnSNAIL3.png-aa1c7d094b106ad26a0fb89516782fea.s3tc.ctex"]
+dest_files=["res://.godot/imported/thumbnSNAIL3.png-aa1c7d094b106ad26a0fb89516782fea.s3tc.ctex", "res://.godot/imported/thumbnSNAIL3.png-aa1c7d094b106ad26a0fb89516782fea.etc2.ctex"]
 
 [params]
 

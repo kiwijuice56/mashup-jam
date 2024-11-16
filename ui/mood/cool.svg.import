@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://fegohef2ibq5"
 path.s3tc="res://.godot/imported/cool.svg-526e3435af1b2a7ad211474a79e9d668.s3tc.ctex"
+path.etc2="res://.godot/imported/cool.svg-526e3435af1b2a7ad211474a79e9d668.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://ui/mood/cool.svg"
-dest_files=["res://.godot/imported/cool.svg-526e3435af1b2a7ad211474a79e9d668.s3tc.ctex"]
+dest_files=["res://.godot/imported/cool.svg-526e3435af1b2a7ad211474a79e9d668.s3tc.ctex", "res://.godot/imported/cool.svg-526e3435af1b2a7ad211474a79e9d668.etc2.ctex"]
 
 [params]
 

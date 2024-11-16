@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bylf5iu42lw18"
 path.s3tc="res://.godot/imported/sad.svg-7f0f1c6f715c7497f07c200a2e4ee999.s3tc.ctex"
+path.etc2="res://.godot/imported/sad.svg-7f0f1c6f715c7497f07c200a2e4ee999.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://ui/mood/sad.svg"
-dest_files=["res://.godot/imported/sad.svg-7f0f1c6f715c7497f07c200a2e4ee999.s3tc.ctex"]
+dest_files=["res://.godot/imported/sad.svg-7f0f1c6f715c7497f07c200a2e4ee999.s3tc.ctex", "res://.godot/imported/sad.svg-7f0f1c6f715c7497f07c200a2e4ee999.etc2.ctex"]
 
 [params]
 

@@ -7,7 +7,7 @@ uniform float sanity = 0.5;
 
 void fragment() {
 	highp float x = mod(texture(noise2, SCREEN_UV + 0.2*sin(vec2(TIME * (1.0 - sanity)))).r + TIME, 1.0);
-	highp vec2 snapped = UV + x * mod(UV, SCREEN_PIXEL_SIZE * 16.0);  
+	highp vec2 snapped = UV + x * mod(UV, SCREEN_PIXEL_SIZE * 16.0);
 	vec4 anger = (textureLod(SCREEN_TEXTURE, snapped, 0.0) + textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0)) / 2.0;
 	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV) * sanity + (1.0 - sanity) * anger;
 }

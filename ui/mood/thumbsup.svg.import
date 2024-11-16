@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmfu55fphkq7v"
 path.s3tc="res://.godot/imported/thumbsup.svg-fcbab4b036c7c53a70585847fb839c13.s3tc.ctex"
+path.etc2="res://.godot/imported/thumbsup.svg-fcbab4b036c7c53a70585847fb839c13.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://ui/mood/thumbsup.svg"
-dest_files=["res://.godot/imported/thumbsup.svg-fcbab4b036c7c53a70585847fb839c13.s3tc.ctex"]
+dest_files=["res://.godot/imported/thumbsup.svg-fcbab4b036c7c53a70585847fb839c13.s3tc.ctex", "res://.godot/imported/thumbsup.svg-fcbab4b036c7c53a70585847fb839c13.etc2.ctex"]
 
 [params]
 
